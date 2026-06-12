@@ -819,6 +819,144 @@
                 fill: currentColor;
                 flex-shrink: 0;
             }
+            /* bắt đầu hộp nhạc */
+            .music-player-box {
+                    display: flex;
+                    align-items: center;
+                    width: 85%; 
+                    max-width: 420px; 
+                    margin: 15px auto; 
+                    background: rgba(20, 20, 20, 0.6); 
+                    border: 1px solid rgba(255, 255, 255, 0.08); 
+                    border-radius: 12px; 
+                    padding: 12px 16px;
+                    box-sizing: border-box;
+                    text-align: left;
+                }
+            
+                .music-cover {
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 10px;
+                    object-fit: cover;
+                    margin-right: 14px;
+                    flex-shrink: 0;
+                }
+            
+                .music-info-container {
+                    display: flex;
+                    flex-direction: column;
+                    flex-grow: 1;
+                    justify-content: center;
+                }
+            
+                .music-detail-row {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    margin-bottom: 8px;
+                }
+            
+                .music-title {
+                    color: #ffffff;
+                    font-family: 'Retro+Gaming', 'Courier New', monospace;
+                    font-size: 12pt;
+                    font-weight: bold;
+                    letter-spacing: 0.5px;
+                }
+            
+                .music-controls {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+            
+                .music-btn {
+                    background: none;
+                    border: none;
+                    padding: 0;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #ffffff;
+                    transition: transform 0.1s ease, opacity 0.2s;
+                }
+            
+                .music-btn.btn-nav {
+                    color: rgba(255, 255, 255, 0.3);
+                    cursor: not-allowed;
+                    width: 16px;
+                    height: 16px;
+                }
+                .music-btn.btn-nav svg {
+                    width: 100%;
+                    height: 100%;
+                    fill: currentColor;
+                }
+            
+                .music-btn.btn-toggle-play {
+                    width: 28px;
+                    height: 28px;
+                    background: #e2e8f0;
+                    border-radius: 50%;
+                    color: #0d0d0d;
+                }
+                .music-btn.btn-toggle-play:hover {
+                    transform: scale(1.08);
+                    background: #ffffff;
+                }
+                .music-btn.btn-toggle-play svg {
+                    width: 14px;
+                    height: 14px;
+                    fill: currentColor;
+                }
+            
+                .music-btn .hidden {
+                    display: none !important;
+                }
+            
+                .music-progress-row {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    gap: 8px;
+                }
+            
+                .music-time {
+                    color: rgba(255, 255, 255, 0.45);
+                    font-family: 'Retro+Gaming', 'Courier New', monospace;
+                    font-size: 8pt;
+                    white-space: nowrap;
+                }
+            
+                .music-progress-bar {
+                    flex-grow: 1;
+                    height: 4px;
+                    background: rgba(255, 255, 255, 0.15);
+                    border-radius: 2px;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                }
+            
+                .music-progress-current {
+                    width: 15%; 
+                    height: 100%;
+                    background: rgba(255, 255, 255, 0.6);
+                    border-radius: 2px 0 0 2px;
+                }
+            
+                .music-progress-dot {
+                    width: 8px;
+                    height: 8px;
+                    background: #ffffff;
+                    border-radius: 50%;
+                    position: absolute;
+                    left: 15%; 
+                    transform: translateX(-50%);
+                }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="https://media.discordapp.net/attachments/1369734618336722945/1514947329269039294/3213213213.png?ex=6a2d3825&is=6a2be6a5&hm=06c8fc66e92c33e7aa0e1f2ea3b54fbabc41db95ee3ff0d403e71801a14b5039&=&format=webp&quality=lossless&width=90&height=90"
