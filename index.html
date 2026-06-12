@@ -819,9 +819,11 @@
                 fill: currentColor;
                 flex-shrink: 0;
             }
-                /* =======================================================
-               BẮT ĐẦU HỘP NHẠC (ĐÃ TỐI ƯU TOÀN DIỆN LAYOUT 2 DÒNG)
+            /* =======================================================
+               BỘ CSS HỘP NHẠC + 5 SỐ CẮT NGANG + 2 NÚT CHỈNH DƯỚI CÙNG
                ======================================================= */
+            
+            /* 1. KHUNG HỘP NHẠC CHÍNH */
             .music-player-box {
                 display: flex;
                 align-items: center;
@@ -850,11 +852,17 @@
                 flex-direction: column;
                 flex-grow: 1;
                 justify-content: center;
-                min-width: 0; /* Ngăn chặn văn bản làm phình hộp nhạc */
+                min-width: 0; 
+                overflow: hidden;
             }
             
-            /* DÒNG 1: Tên bài hát nằm độc lập ở hàng trên */
+            /* DÒNG 1: Tên bài hát hàng trên */
+            .music-detail-row,
             .music-title-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
                 margin-bottom: 4px;
                 text-align: left;
             }
@@ -865,23 +873,27 @@
                 font-size: 12pt;
                 font-weight: bold;
                 letter-spacing: 0.5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
-            /* DÒNG 2: Thanh tiến trình bên trái và cụm nút bên phải song song */
+            /* DÒNG 2: Ép thanh trượt và cụm nút luôn chung 1 hàng ngang */
             .music-controls-row {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                gap: 12px;
+                gap: 10px;
                 width: 100%;
+                flex-wrap: nowrap; 
             }
             
-            /* Cấu trúc cụm thanh thời gian chạy */
             .audio-player-timeline {
                 display: flex;
                 align-items: center;
                 gap: 8px;
-                flex-grow: 1; /* Tự động kéo dài tối đa phần không gian bên trái */
+                flex-grow: 1; 
+                min-width: 0;
             }
             
             .audio-player-timeline span {
@@ -891,9 +903,9 @@
                 white-space: nowrap;
             }
             
-            /* Thanh nhạc trượt ngang mỏng */
             #music-progress {
                 flex-grow: 1;
+                min-width: 40px;
                 -webkit-appearance: none;
                 appearance: none;
                 height: 4px;
@@ -904,7 +916,6 @@
                 margin: 0;
             }
             
-            /* Chấm tròn trắng định vị mượt mà */
             #music-progress::-webkit-slider-thumb {
                 -webkit-appearance: none;
                 appearance: none;
@@ -916,12 +927,11 @@
                 cursor: pointer;
             }
             
-            /* Cụm 3 nút bấm điều khiển dồn gọn ghẽ về góc phải cuối dòng */
             .music-controls {
                 display: flex;
                 align-items: center;
-                gap: 4px;
-                flex-shrink: 0; /* Đóng băng kích thước, không cho thanh nhạc bóp méo nút */
+                gap: 6px;
+                flex-shrink: 0; 
             }
             
             .music-btn {
@@ -935,8 +945,8 @@
             }
             
             .music-btn svg {
-                width: 15px; /* Giảm nhẹ 1px giúp tổng thể thanh nhạc gọn gàng hơn */
-                height: 15px;
+                width: 14px;
+                height: 14px;
                 fill: #ffffff;
                 opacity: 0.7;
                 transition: opacity 0.2s;
@@ -957,23 +967,23 @@
             .hidden {
                 display: none !important;
             }
-            /* =======================================================
-               KẾT THÚC HỘP NHẠC
-               ======================================================= */
-            /* Khung bọc tạo hàng cho cụm số */
-              .custom-theme-wrapper {
+            
+            
+            /* 2. CẤU TRÚC 5 SỐ CẮT NGANG ĐƯỜNG KẺ (NẰM DƯỚI HỘP NHẠC) */
+            .theme-buttons-container {
                 position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
                 width: 85%;
                 max-width: 420px;
-                margin: 22px auto 12px auto;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 28px;
-              }
+                margin: 20px auto 10px auto;
+            }
             
-              /* Thanh trượt chạy nền phía sau cắt ngang */
-              .custom-line-bg {
+            /* Đường kẻ mỏng chạy xuyên qua giữa 5 số */
+            .theme-buttons-container::before {
+                content: "";
                 position: absolute;
                 left: 0;
                 right: 0;
@@ -982,25 +992,17 @@
                 height: 1px;
                 background: rgba(255, 255, 255, 0.15);
                 z-index: 1;
-              }
+            }
             
-              /* Khung chứa 5 số che thanh trượt để tạo khoảng trống đứt đoạn */
-              .custom-buttons-inside {
+            /* Định dạng các nút tròn 1 2 3 4 5 */
+            .theme-btn {
                 position: relative;
-                z-index: 2;
-                display: flex;
-                gap: 14px;
-                background: #000000; /* !!! BẮT BUỘC: Điền đúng màu nền đen/tối của trang web bạn để giấu thanh ngang đi nhé !!! */
-                padding: 0 15px;
-              }
-            
-              /* Định dạng các nút số tròn 1 2 3 4 5 */
-              .custom-buttons-inside .theme-btn {
-                width: 24px;
-                height: 24px;
+                z-index: 2; /* Đẩy nổi lên trên đường kẻ */
+                width: 26px;
+                height: 26px;
                 border-radius: 50%;
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                background: transparent;
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                background: #0f0f12; /* !!! MẸO: Bạn đổi mã màu này trùng màu nền đen web của bạn để che đường kẻ đi nhé !!! */
                 color: #ffffff;
                 font-family: 'Retro+Gaming', monospace;
                 font-size: 11px;
@@ -1009,46 +1011,52 @@
                 justify-content: center;
                 cursor: pointer;
                 transition: all 0.2s ease;
-              }
+            }
             
-              .custom-buttons-inside .theme-btn:hover {
+            .theme-btn:hover {
                 background: #ffffff;
                 color: #000000;
-              }
+            }
             
-              /* Khung dưới cùng chứa 2 thanh trượt âm lượng và độ mờ */
-              .custom-sliders-box {
-                width: 85%;
-                max-width: 420px;
-                margin: 15px auto 25px auto;
+            
+            /* 3. KHUNG CHỨA 2 NÚT CHỈNH (ÂM LƯỢNG & ĐỘ MỜ) DƯỚI CÙNG */
+            .sliders-container {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 gap: 16px;
-              }
+                width: 85%;
+                max-width: 420px;
+                margin: 15px auto;
+                background: rgba(20, 20, 20, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 20px;
+                padding: 8px 16px;
+                box-sizing: border-box;
+            }
             
-              .custom-slider-item {
+            /* Định dạng các thanh trượt kéo bên dưới */
+            .volume-container, 
+            .opacity-container,
+            .sliders-container > div {
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                gap: 8px;
                 flex: 1;
-                background: rgba(20, 20, 20, 0.6);
-                padding: 6px 14px;
-                border-radius: 20px;
-                border: 1px solid rgba(255, 255, 255, 0.06);
-              }
+            }
             
-              .custom-slider-item svg {
-                width: 15px;
-                height: 15px;
+            .sliders-container svg {
+                width: 16px;
+                height: 16px;
                 fill: #ffffff;
                 opacity: 0.8;
-              }
+            }
             
-              .custom-slider-item input[type="range"] {
+            .sliders-container input[type="range"] {
                 flex: 1;
                 height: 4px;
                 cursor: pointer;
-              }
+            }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="https://media.discordapp.net/attachments/1369734618336722945/1514947329269039294/3213213213.png?ex=6a2d3825&is=6a2be6a5&hm=06c8fc66e92c33e7aa0e1f2ea3b54fbabc41db95ee3ff0d403e71801a14b5039&=&format=webp&quality=lossless&width=90&height=90"
