@@ -663,78 +663,79 @@
             #results-hint { width: 150px; font-size: 10px; padding: 6px 10px; }
             #start-text { font-size: 18px; padding: 0 20px; }
         }
+            /* Trang trí hộp Discord */
+            .discord-status-box {
+                display: flex;
+                align-items: center;
+                width: 85%; 
+                max-width: 380px;
+                margin: 15px auto; /* Căn giữa, tạo khoảng cách đều đẹp với gạch ngang */
+                background: rgba(20, 20, 20, 0.6); 
+                border: 1px solid rgba(255, 255, 255, 0.08); 
+                border-radius: 12px; 
+                padding: 10px 14px;
+                box-sizing: border-box;
+                position: relative;
+                text-align: left;
+            }
+            
+            .discord-avatar-wrapper {
+                position: relative;
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+                flex-shrink: 0;
+            }
+            
+            .discord-avatar {
+                width: 100%;
+                height: 100%;
+                border-radius: 9px;
+                object-fit: cover;
+            }
+            
+            .discord-online-dot {
+                position: absolute;
+                bottom: -2px;
+                right: -2px;
+                width: 11px;
+                height: 11px;
+                background-color: #23a55a;
+                border: 2px solid #0d0d0d;
+                border-radius: 50%;
+            }
+            
+            .discord-info-text {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .discord-username {
+                color: #ffffff;
+                font-family: 'Retro+Gaming', 'Courier New', monospace; 
+                font-size: 11pt;
+                font-weight: bold;
+            }
+            
+            .discord-right-tag {
+                position: absolute;
+                right: 14px;
+                display: flex;
+                align-items: center;
+                color: rgba(255, 255, 255, 0.35);
+                font-family: 'Retro+Gaming', 'Courier New', monospace;
+                font-size: 8.5pt;
+            }
+            
+            .mini-discord-icon {
+                width: 14px;
+                height: 14px;
+                fill: currentColor;
+                margin-right: 5px;
+                opacity: 0.4;
+            }
+
     </style>
-    /* Trang trí hộp Discord */
-.discord-status-box {
-    display: flex;
-    align-items: center;
-    width: 85%; 
-    max-width: 380px;
-    margin: 15px auto; /* Căn giữa, tạo khoảng cách đều đẹp với gạch ngang */
-    background: rgba(20, 20, 20, 0.6); 
-    border: 1px solid rgba(255, 255, 255, 0.08); 
-    border-radius: 12px; 
-    padding: 10px 14px;
-    box-sizing: border-box;
-    position: relative;
-    text-align: left;
-}
-
-.discord-avatar-wrapper {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    margin-right: 12px;
-    flex-shrink: 0;
-}
-
-.discord-avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 9px;
-    object-fit: cover;
-}
-
-.discord-online-dot {
-    position: absolute;
-    bottom: -2px;
-    right: -2px;
-    width: 11px;
-    height: 11px;
-    background-color: #23a55a;
-    border: 2px solid #0d0d0d;
-    border-radius: 50%;
-}
-
-.discord-info-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.discord-username {
-    color: #ffffff;
-    font-family: 'Retro+Gaming', 'Courier New', monospace; 
-    font-size: 11pt;
-    font-weight: bold;
-}
-
-.discord-right-tag {
-    position: absolute;
-    right: 14px;
-    display: flex;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.35);
-    font-family: 'Retro+Gaming', 'Courier New', monospace;
-    font-size: 8.5pt;
-}
-
-.mini-discord-icon {
-    width: 14px;
-    height: 14px;
-    fill: currentColor;
-    margin-right: 5px;
-    opacity: 0.4;
-}
     <link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
 </head>
 <body class="home-theme" onload="initMedia()">
