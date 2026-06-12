@@ -820,9 +820,10 @@
                 flex-shrink: 0;
             }
            /* =======================================================
-               BỘ CSS HỘP NHẠC TỔNG HỢP - KHÔNG LỖI - ĐÃ FIX ICON TO
+               BỘ CSS HỘP NHẠC TỔNG HỢP CHUẨN ĐỒNG BỘ THEO FILE HTML GỐC
                ======================================================= */
             
+            /* 1. KHUNG HỘP NHẠC CHÍNH */
             .music-player-box {
                 display: flex;
                 align-items: center;
@@ -945,8 +946,9 @@
                 opacity: 0.7;
             }
             
-            /* KHU VỰC 5 NÚT SỐ TRÒN CẮT NGANG ĐƯỜNG KẺ */
-            .theme-buttons-container {
+            
+            /* 2. ĐỊNH DẠNG KHỐI 5 NÚT SỐ CẮT NGANG ĐƯỜNG KÈ (.controls) */
+            .controls {
                 position: relative;
                 display: flex;
                 justify-content: center;
@@ -957,8 +959,8 @@
                 margin: 20px auto 10px auto;
             }
             
-            /* Đường kẻ ngang chạy phía sau */
-            .theme-buttons-container::before {
+            /* Tạo đường kẻ mỏng chạy xuyên qua giữa */
+            .controls::before {
                 content: "";
                 position: absolute;
                 left: 0;
@@ -970,14 +972,15 @@
                 z-index: 1;
             }
             
-            .theme-btn {
+            /* Các nút tròn số 1 2 3 4 5 gốc */
+            .theme-button {
                 position: relative;
-                z-index: 2; 
+                z-index: 2; /* Đẩy số nổi lên trên đường kẻ */
                 width: 26px;
                 height: 26px;
                 border-radius: 50%;
                 border: 1px solid rgba(255, 255, 255, 0.35);
-                background: #000000; /* ĐỔI MÀU NÀY TRÙNG MÀU NỀN WEB CỦA ÔNG ĐỂ CHE ĐƯỜNG KẺ */
+                background: #0f0f12; /* ĐỔI MÀU NÀY THEO MÀU NỀN WEB CỦA ÔNG ĐỂ CHE ĐƯỜNG KÈ */
                 color: #ffffff;
                 font-family: 'Retro+Gaming', monospace;
                 font-size: 11px;
@@ -985,10 +988,17 @@
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
+                transition: all 0.2s ease;
             }
             
-            /* KHU VỰC 2 THANH KÉO (VOLUME & OPACITY) DƯỚI CÙNG */
-            .sliders-container {
+            .theme-button:hover {
+                background: #ffffff;
+                color: #000000;
+            }
+            
+            
+            /* 3. KHUNG CHỨA 2 THANH TRƯỢT VOLUME & ĐỘ MỜ DƯỚI CÙNG (.top-controls) */
+            .top-controls {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -1003,24 +1013,42 @@
                 box-sizing: border-box;
             }
             
-            .volume-container, .opacity-container {
+            .volume-control, .transparency-control {
                 display: flex;
                 align-items: center;
                 gap: 8px;
                 flex: 1;
             }
             
-            /* QUAN TRỌNG: KHỐNG CHẾ ICON SVG KHÔNG BỊ TO ĐÙNG */
-            .sliders-container svg {
+            /* FIX TRIỆT ĐỂ LỖI ICON SVG TO ĐÙNG CHIẾM TOÀN MÀN HÌNH */
+            .top-controls svg,
+            .volume-control svg,
+            .transparency-control svg {
                 width: 16px !important;
                 height: 16px !important;
-                fill: #ffffff;
-                flex-shrink: 0;
+                stroke: #ffffff !important;
+                fill: none !important;
+                flex-shrink: 0 !important;
             }
             
-            .sliders-container input[type="range"] {
+            .top-controls .slider {
                 flex: 1;
                 height: 4px;
+                cursor: pointer;
+                -webkit-appearance: none;
+                appearance: none;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 2px;
+                outline: none;
+            }
+            
+            .top-controls .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: #ffffff;
                 cursor: pointer;
             }
             
