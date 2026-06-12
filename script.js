@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  const startMessage = "CHAN BỐ MÀY ĐI";
+  const startMessage = "CLICK VÀO ĐÂY CHAN BỐ MÀY ĐI";
   let startTextContent = '';
   let startIndex = 0;
   let startCursorVisible = true;
