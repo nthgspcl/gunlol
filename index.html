@@ -819,11 +819,10 @@
                 fill: currentColor;
                 flex-shrink: 0;
             }
-            /* =======================================================
-               BỘ CSS HỘP NHẠC + 5 SỐ CẮT NGANG + 2 NÚT CHỈNH DƯỚI CÙNG
+           /* =======================================================
+               BỘ CSS HỘP NHẠC TỔNG HỢP - KHÔNG LỖI - ĐÃ FIX ICON TO
                ======================================================= */
             
-            /* 1. KHUNG HỘP NHẠC CHÍNH */
             .music-player-box {
                 display: flex;
                 align-items: center;
@@ -856,15 +855,12 @@
                 overflow: hidden;
             }
             
-            /* DÒNG 1: Tên bài hát hàng trên */
-            .music-detail-row,
             .music-title-row {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 width: 100%;
                 margin-bottom: 4px;
-                text-align: left;
             }
             
             .music-title {
@@ -878,7 +874,6 @@
                 text-overflow: ellipsis;
             }
             
-            /* DÒNG 2: Ép thanh trượt và cụm nút luôn chung 1 hàng ngang */
             .music-controls-row {
                 display: flex;
                 align-items: center;
@@ -923,7 +918,6 @@
                 height: 10px;
                 border-radius: 50%;
                 background: #ffffff;
-                box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
                 cursor: pointer;
             }
             
@@ -949,27 +943,9 @@
                 height: 14px;
                 fill: #ffffff;
                 opacity: 0.7;
-                transition: opacity 0.2s;
             }
             
-            .music-btn:hover svg {
-                opacity: 1;
-            }
-            
-            .music-btn[disabled] {
-                cursor: not-allowed;
-            }
-            
-            .music-btn[disabled] svg {
-                opacity: 0.25;
-            }
-            
-            .hidden {
-                display: none !important;
-            }
-            
-            
-            /* 2. CẤU TRÚC 5 SỐ CẮT NGANG ĐƯỜNG KẺ (NẰM DƯỚI HỘP NHẠC) */
+            /* KHU VỰC 5 NÚT SỐ TRÒN CẮT NGANG ĐƯỜNG KẺ */
             .theme-buttons-container {
                 position: relative;
                 display: flex;
@@ -981,7 +957,7 @@
                 margin: 20px auto 10px auto;
             }
             
-            /* Đường kẻ mỏng chạy xuyên qua giữa 5 số */
+            /* Đường kẻ ngang chạy phía sau */
             .theme-buttons-container::before {
                 content: "";
                 position: absolute;
@@ -994,15 +970,14 @@
                 z-index: 1;
             }
             
-            /* Định dạng các nút tròn 1 2 3 4 5 */
             .theme-btn {
                 position: relative;
-                z-index: 2; /* Đẩy nổi lên trên đường kẻ */
+                z-index: 2; 
                 width: 26px;
                 height: 26px;
                 border-radius: 50%;
-                border: 1px solid rgba(255, 255, 255, 0.4);
-                background: #0f0f12; /* !!! MẸO: Bạn đổi mã màu này trùng màu nền đen web của bạn để che đường kẻ đi nhé !!! */
+                border: 1px solid rgba(255, 255, 255, 0.35);
+                background: #000000; /* ĐỔI MÀU NÀY TRÙNG MÀU NỀN WEB CỦA ÔNG ĐỂ CHE ĐƯỜNG KẺ */
                 color: #ffffff;
                 font-family: 'Retro+Gaming', monospace;
                 font-size: 11px;
@@ -1010,16 +985,9 @@
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                transition: all 0.2s ease;
             }
             
-            .theme-btn:hover {
-                background: #ffffff;
-                color: #000000;
-            }
-            
-            
-            /* 3. KHUNG CHỨA 2 NÚT CHỈNH (ÂM LƯỢNG & ĐỘ MỜ) DƯỚI CÙNG */
+            /* KHU VỰC 2 THANH KÉO (VOLUME & OPACITY) DƯỚI CÙNG */
             .sliders-container {
                 display: flex;
                 justify-content: space-between;
@@ -1035,27 +1003,29 @@
                 box-sizing: border-box;
             }
             
-            /* Định dạng các thanh trượt kéo bên dưới */
-            .volume-container, 
-            .opacity-container,
-            .sliders-container > div {
+            .volume-container, .opacity-container {
                 display: flex;
                 align-items: center;
                 gap: 8px;
                 flex: 1;
             }
             
+            /* QUAN TRỌNG: KHỐNG CHẾ ICON SVG KHÔNG BỊ TO ĐÙNG */
             .sliders-container svg {
-                width: 16px;
-                height: 16px;
+                width: 16px !important;
+                height: 16px !important;
                 fill: #ffffff;
-                opacity: 0.8;
+                flex-shrink: 0;
             }
             
             .sliders-container input[type="range"] {
                 flex: 1;
                 height: 4px;
                 cursor: pointer;
+            }
+            
+            .hidden {
+                display: none !important;
             }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
