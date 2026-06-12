@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAQLIV Profile</title>
+    <!-- 1. THAY ĐỔI TIÊU ĐỀ TRANG WEB (Hiển thị trên tab trình duyệt) -->
+    <title>JAQLIV Profile - My Bio Link</title>
+    
     <style>
         * {
             margin: 0;
@@ -12,11 +14,12 @@
             font-family: 'Courier New', monospace;
         }
 
-        
+        /* Hiệu ứng con trỏ chuột custom */
         .custom-cursor {
             position: fixed;
             width: 40px;
             height: 40px;
+            /* LƯU Ý: Thay đổi file 'custom_cursor.png' trong thư mục assets để đổi hình chuột */
             background: url('assets/custom_cursor.png') no-repeat center center;
             background-size: contain;
             pointer-events: none;
@@ -24,7 +27,6 @@
             transform: translate(-50%, -50%);
         }
 
-        
         body:not(.touch-device) {
             cursor: none;
         }
@@ -78,7 +80,7 @@
             display: none !important;
         }
 
-        
+        /* Nút chuyển đổi Theme ở phía dưới */
         .controls {
             position: fixed;
             bottom: calc(50% - 240px - 10px);
@@ -113,14 +115,14 @@
             border-color: rgba(255, 255, 255, 0.8);
         }
 
-        
-        .volume-control {
+        /* Thanh trượt Âm lượng và Độ trong suốt */
+        .volume-control, .transparency-control {
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .volume-icon {
+        .volume-icon, .transparency-icon {
             width: 20px;
             height: 20px;
             cursor: pointer;
@@ -148,20 +150,6 @@
             cursor: pointer;
         }
 
-        
-        .transparency-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .transparency-icon {
-            width: 20px;
-            height: 20px;
-            color: white;
-        }
-
-        
         .top-controls {
             position: fixed;
             bottom: calc(50% - 240px - 60px);
@@ -177,7 +165,7 @@
             backdrop-filter: blur(5px);
         }
 
-        
+        /* Khung Profile chính */
         #profile-block {
             position: fixed;
             top: 50%;
@@ -212,6 +200,7 @@
             height: 150px;
         }
 
+        /* Quầng sáng xoay quanh Avatar */
         .profile-container::after {
             content: '';
             position: absolute;
@@ -258,7 +247,7 @@
             margin-bottom: 10px;
         }
 
-        
+        /* Font chữ nghệ thuật của tên hiển thị */
         @font-face {
             font-family: 'Angel Wish';
             src: url('assets/Angel_wish.ttf') format('truetype');
@@ -431,7 +420,7 @@
             transform: scale(1.4) rotateY(15deg);
         }
 
-        
+        /* Khung hiển thị Kỹ năng (Programming Skills) */
         #skills-block {
             position: fixed;
             top: 50%;
@@ -490,19 +479,10 @@
             transition: width 2s;
         }
 
-        #python-bar {
-            background: linear-gradient(90deg, #ff6b6b, #ff9f9f);
-        }
+        #python-bar { background: linear-gradient(90deg, #ff6b6b, #ff9f9f); }
+        #cpp-bar { background: linear-gradient(90deg, #4facfe, #00f2fe); }
+        #csharp-bar { background: linear-gradient(90deg, #43e97b, #38f9d7); }
 
-        #cpp-bar {
-            background: linear-gradient(90deg, #4facfe, #00f2fe);
-        }
-
-        #csharp-bar {
-            background: linear-gradient(90deg, #43e97b, #38f9d7);
-        }
-
-        
         #results-button-container {
             position: fixed;
             top: 20px;
@@ -555,77 +535,32 @@
             border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
         }
 
-        
-        .home-theme #profile-block,
-        .home-theme #skills-block {
-            border-color: rgba(0, 195, 255, 0.5);
-        }
-
-        .hacker-theme #profile-block,
-        .hacker-theme #skills-block {
-            border-color: rgba(0, 255, 0, 0.5);
-        }
-
-        .rain-theme #profile-block,
-        .rain-theme #skills-block {
-            border-color: rgba(100, 149, 237, 0.5);
-        }
-
-        .anime-theme #profile-block,
-        .anime-theme #skills-block {
-            border-color: rgba(255, 0, 255, 0.5);
-        }
-
-        .car-theme #profile-block,
-        .car-theme #skills-block {
-            border-color: rgba(255, 165, 0, 0.5);
-        }
-
-        
-        .glitch {
-            animation: glitch 0.2s ease-in-out;
-        }
+        /* Màu viền theo từng Theme */
+        .home-theme #profile-block, .home-theme #skills-block { border-color: rgba(0, 195, 255, 0.5); }
+        .hacker-theme #profile-block, .hacker-theme #skills-block { border-color: rgba(0, 255, 0, 0.5); }
+        .rain-theme #profile-block, .rain-theme #skills-block { border-color: rgba(100, 149, 237, 0.5); }
+        .anime-theme #profile-block, .anime-theme #skills-block { border-color: rgba(255, 0, 255, 0.5); }
+        .car-theme #profile-block, .car-theme #skills-block { border-color: rgba(255, 165, 0, 0.5); }
 
         @keyframes glitch {
-            0% {
-                transform: translate(0);
-            }
-            20% {
-                transform: translate(-2px, 2px);
-            }
-            40% {
-                transform: translate(-2px, -2px);
-            }
-            60% {
-                transform: translate(2px, 2px);
-            }
-            80% {
-                transform: translate(2px, -2px);
-            }
-            100% {
-                transform: translate(0);
-            }
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
 
         @keyframes orbit {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes fast-orbit {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        
         .cursor-trail {
             position: fixed;
             pointer-events: none;
@@ -642,7 +577,6 @@
             transition: opacity 0.3s ease;
         }
 
-        
         #start-screen {
             position: fixed;
             top: 0;
@@ -665,9 +599,8 @@
             text-align: center;
         }
 
-        
+        /* Tối ưu hóa hiển thị Responsive trên Mobile Điện thoại */
         @media (max-width: 430px) {
-            
             #profile-block, #skills-block {
                 width: 90vw;
                 max-width: 350px;
@@ -684,16 +617,9 @@
                 gap: 10px;
             }
 
-            .profile-container {
-                width: 120px;
-                height: 120px;
-            }
-
-            .profile-picture {
-                width: 120px;
-                height: 120px;
-            }
-
+            .profile-container { width: 120px; height: 120px; }
+            .profile-picture { width: 120px; height: 120px; }
+            
             .profile-info {
                 align-items: center;
                 text-align: center;
@@ -710,134 +636,30 @@
                 letter-spacing: 2px;
             }
 
-            .badge-group {
-                justify-content: center;
-                gap: 6px;
-            }
-
-            .badge {
-                width: 18px;
-                height: 18px;
-            }
-
-            .badge-container .tooltip {
-                width: 100px;
-                font-size: 12px;
-                margin-left: -50px;
-                bottom: 110%;
-            }
-
-            #profile-bio {
-                font-size: 14px;
-                line-height: 1.4;
-            }
-
-            .bio-separator {
-                margin: 15px 0;
-            }
-
-            .social-links {
-                gap: 10px;
-                justify-content: center;
-            }
-
-            .social-icon {
-                width: 32px;
-                height: 32px;
-            }
-
-            .visitor-counter {
-                font-size: 12px;
-                padding: 6px 12px;
-                align-self: center;
-            }
-
-            .visitor-icon {
-                width: 16px;
-                height: 16px;
-            }
-
-            .visitor-counter .tooltip {
-                width: 100px;
-                font-size: 12px;
-                margin-left: -50px;
-                top: -30px;
-            }
-
-            .skills-title {
-                font-size: 18px;
-                margin-bottom: 10px;
-            }
-
-            .skill-icon {
-                width: 18px;
-                height: 18px;
-            }
-
-            .skill-name span {
-                font-size: 14px;
-            }
-
-            
-            .controls {
-                bottom: 20px;
-                gap: 8px;
-                padding: 5px 8px;
-            }
-
-            .theme-button {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
-            }
-
-            
-            .top-controls {
-                bottom: 70px;
-                gap: 10px;
-                padding: 6px 10px;
-            }
-
-            .volume-control, .transparency-control {
-                gap: 6px;
-            }
-
-            .volume-icon, .transparency-icon {
-                width: 18px;
-                height: 18px;
-            }
-
-            .slider {
-                width: 60px;
-                height: 4px;
-            }
-
-            .slider::-webkit-slider-thumb {
-                width: 10px;
-                height: 10px;
-            }
-
-            
-            #results-button-container {
-                top: 10px;
-            }
-
-            #results-theme {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-
-            #results-hint {
-                width: 150px;
-                font-size: 10px;
-                padding: 6px 10px;
-            }
-
-            
-            #start-text {
-                font-size: 18px;
-                padding: 0 20px;
-            }
+            .badge-group { justify-content: center; gap: 6px; }
+            .badge { width: 18px; height: 18px; }
+            .badge-container .tooltip { width: 100px; font-size: 12px; margin-left: -50px; bottom: 110%; }
+            #profile-bio { font-size: 14px; line-height: 1.4; }
+            .bio-separator { margin: 15px 0; }
+            .social-links { gap: 10px; justify-content: center; }
+            .social-icon { width: 32px; height: 32px; }
+            .visitor-counter { align-self: center; font-size: 12px; padding: 6px 12px; }
+            .visitor-icon { width: 16px; height: 16px; }
+            .visitor-counter .tooltip { width: 100px; font-size: 12px; margin-left: -50px; top: -30px; }
+            .skills-title { font-size: 18px; margin-bottom: 10px; }
+            .skill-icon { width: 18px; height: 18px; }
+            .skill-name span { font-size: 14px; }
+            .controls { bottom: 20px; gap: 8px; padding: 5px 8px; }
+            .theme-button { width: 28px; height: 28px; font-size: 12px; }
+            .top-controls { bottom: 70px; gap: 10px; padding: 6px 10px; }
+            .volume-control, .transparency-control { gap: 6px; }
+            .volume-icon, .transparency-icon { width: 18px; height: 18px; }
+            .slider { width: 60px; height: 4px; }
+            .slider::-webkit-slider-thumb { width: 10px; height: 10px; }
+            #results-button-container { top: 10px; }
+            #results-theme { padding: 6px 12px; font-size: 12px; }
+            #results-hint { width: 150px; font-size: 10px; padding: 6px 10px; }
+            #start-text { font-size: 18px; padding: 0 20px; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
@@ -846,126 +668,163 @@
     
     <div class="custom-cursor"></div>
 
-    
+    <!-- 2. MÀN HÌNH CHỜ CLICK ĐỂ VÀO WEB -->
     <div id="start-screen">
-        <div id="start-text"></div>
+        <!-- Thay chữ "CHAN BỐ MÀY ĐI" ở dưới này nếu muốn -->
+        <div id="start-text">[ CHAN BỐ MÀY ĐI ^^ ]</div>
     </div>
 
     <div class="container">
         
+        <!-- 3. THAY VIDEO NỀN MẶC ĐỊNH -->
+        <!-- Thay 'assets/background.mp4' bằng đường dẫn video của bạn -->
         <video id="background" autoplay loop muted playsinline webkit-playsinline>
             <source src="assets/background.mp4" type="video/mp4">
         </video>
 
-        
         <div class="glitch-overlay"></div>
-        <div id="hacker-overlay" class="hidden">
-            
-        </div>
-        <div id="snow-overlay" class="hidden">
-            
-        </div>
+        <div id="hacker-overlay" class="hidden"></div>
+        <div id="snow-overlay" class="hidden"></div>
 
-
+        <!-- KHUNG THÔNG TIN CÁ NHÂN -->
         <div id="profile-block">
             <div class="profile-header">
                 <div class="profile-container">
+                    <!-- 4. THAY ẢNH ĐẠI DIỆN (AVATAR) -->
+                    <!-- Sửa 'assets/profile.gif' thành file ảnh/gif của bạn -->
                     <img src="assets/profile.gif" alt="Profile" class="profile-picture">
                 </div>
                 <div class="profile-info">
                     <div class="name-and-badges">
-                        <div id="profile-name">JAQLIV</div>
+                        <!-- 5. THAY TÊN CỦA BẠN -->
+                        <div id="profile-name">Suni</div>
+                        
+                        <!-- KHU VỰC DANH HIỆU / BADGES (Các icon nhỏ cạnh tên) -->
                         <div class="badge-box">
                             <div class="badge-box-inner">
                                 <div class="badge-group">
+                                    
+                                    <!-- Mẫu Badge 1: Staff -->
+                                    <!-- img src: thay link icon | span class="tooltip": chữ hiện ra khi di chuột vào -->
                                     <div class="badge-container">
                                         <img src="assets/staff.gif" alt="Staff" class="badge">
                                         <span class="tooltip">Staff Member</span>
                                     </div>
+                                    
+                                    <!-- Mẫu Badge 2: Owner -->
                                     <div class="badge-container">
                                         <img src="assets/owner.gif" alt="Owner" class="badge">
                                         <span class="tooltip">Owner</span>
                                     </div>
+                                    
+                                    <!-- Mẫu Badge 3: Partner -->
                                     <div class="badge-container">
                                         <img src="assets/partner.gif" alt="Partner" class="badge">
                                         <span class="tooltip">Partner</span>
                                     </div>
+                                    
+                                    <!-- Mẫu Badge 4: Developer -->
                                     <div class="badge-container">
                                         <img src="assets/developer.png" alt="Developer" class="badge">
                                         <span class="tooltip">Developer</span>
                                     </div>
+                                    
+                                    <!-- Mẫu Badge 5: Bug Bounty -->
                                     <div class="badge-container">
                                         <img src="assets/bug_bounty.gif" alt="Bug Bounty" class="badge">
                                         <span class="tooltip">Bug Bounty</span>
                                     </div>
+                                    
+                                    <!-- Mẫu Badge 6: Hated Guns -->
                                     <div class="badge-container">
                                         <img src="assets/hated_guns.gif" alt="Hated by Guns.lol" class="badge">
                                         <span class="tooltip">Hated by Guns.lol</span>
                                     </div>
+                                    
+                                    <!-- Mẫu Badge 7: Hated Fakecrime -->
                                     <div class="badge-container">
                                         <img src="assets/hated_fakecrime.gif" alt="Hated by Fakecrime.bio" class="badge">
                                         <span class="tooltip">Hated by Fakecrime.bio</span>
                                     </div>
+                                    
+                                    <!-- Mẫu Badge 8: Verified -->
                                     <div class="badge-container">
                                         <img src="assets/verified.gif" alt="Verified" class="badge">
-                                        <span class="tooltip">Verified</span>
+                                        <span class="tooltip">Verified Official</span>
                                     </div>
+                                    
+                                    <!-- Mẫu Badge 9: Rule Maker -->
                                     <div class="badge-container">
                                         <img src="assets/rule_maker.gif" alt="Rule Maker" class="badge">
                                         <span class="tooltip">Rule Maker</span>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="profile-bio"></div>
+                    <!-- 6. THAY ĐỔI ĐOẠN TIỂU SỬ (BIO) -->
+                    <!-- Code cũ đang để trống, bạn hãy viết tiểu sử của bạn vào giữa cặp thẻ dưới này -->
+                    <div id="profile-bio">Chúng ta bận cãi vã, bận đổ lỗi cho nhau, bận làm tổn thương nhau, bận đoán già đoán non mà quên đi ý định ban đầu, quên đi những lời hẹn ước. Quên đi cả việc chúng ta đã phải trải qua những khó khăn như thế nào mới đến được với nhau.</div>
                 </div>
             </div>
 
             <div class="bio-separator"></div>
 
             <div class="profile-footer">
-
+                <!-- 7. CẤU HÌNH CÁC ĐƯỜNG LINK MẠNG XÃ HỘI (SOCIAL LINKS) -->
+                <!-- Thay href="..." bằng link thật của bạn. Thay src="..." để đổi icon mạng xã hội nếu cần -->
                 <div class="social-links">
-                    <a href="https://discord.gg/motiongoats" target="_blank">
+                    <!-- Link Discord -->
+                    <a href="https://discord.gg/bunnysaymeow" target="_blank">
                         <img src="assets/discord.png" alt="Discord" class="social-icon">
                     </a>
-                    <a href="https://github.com/JAQLIV" target="_blank">
+                    <!-- Link GitHub -->
+                    <a href="https://github.com/nthgspcl" target="_blank">
                         <img src="assets/github.png" alt="GitHub" class="social-icon">
                     </a>
-                    <a href="https://www.youtube.com/@jaqliv" target="_blank">
+                    <!-- Link YouTube -->
+                    <a href="#" target="_blank">
                         <img src="assets/youtube.png" alt="YouTube" class="social-icon">
                     </a>
-                    <a href="https://www.tiktok.com/@jaqliv" target="_blank">
+                    <!-- Link TikTok -->
+                    <a href="https://www.tiktok.com/@_nthgspcl" target="_blank">
                         <img src="assets/tiktok.png" alt="TikTok" class="social-icon">
                     </a>
                 </div>
 
-
+                <!-- LƯỢT XEM PROFILE (Số này hiện tại đang là tĩnh Fix cứng) -->
                 <div class="visitor-counter">
                     <svg class="visitor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                     </svg>
-                    <span id="visitor-count">21234</span>
+                    <!-- Bạn có thể sửa số 21234 thành số bất kỳ bạn thích -->
+                    <span id="visitor-count">39234</span>
                     <span class="tooltip">Profile Views</span>
                 </div>
             </div>
         </div>
 
-
+        <!-- KHUNG KỸ NĂNG (SKILLS BLOCK) -->
+        <!-- 8. THAY ĐỔI CÁC KỸ NĂNG / PHẦN TRĂM KỸ NĂNG -->
         <div id="skills-block" class="hidden">
             <h2 class="skills-title">Programming Skills</h2>
+            
+            <!-- Skill 1: Python -->
             <div class="skill">
                 <div class="skill-name">
                     <img src="assets/python.png" alt="Python" class="skill-icon">
                     <span>Python</span>
-                    <span>87%</span>
+                    <span>87%</span> <!-- Đổi chữ hiển thị phần trăm ở đây -->
                 </div>
                 <div class="skill-bar-container">
+                    <!-- LƯU Ý: Đoạn tăng thanh kỹ năng thực tế sẽ được chạy bằng JavaScript trong file script.js -->
                     <div id="python-bar" class="skill-bar"></div>
                 </div>
             </div>
+            
+            <!-- Skill 2: C++ -->
             <div class="skill">
                 <div class="skill-name">
                     <img src="assets/cpp.png" alt="C++" class="skill-icon">
@@ -976,6 +835,8 @@
                     <div id="cpp-bar" class="skill-bar"></div>
                 </div>
             </div>
+            
+            <!-- Skill 3: C# -->
             <div class="skill">
                 <div class="skill-name">
                     <img src="assets/csharp.png" alt="C#" class="skill-icon">
@@ -988,13 +849,12 @@
             </div>
         </div>
 
-
         <div id="results-button-container" class="hidden">
             <button id="results-theme">View Results</button>
             <div id="results-hint" class="hidden">Click again to return to profile</div>
         </div>
 
-
+        <!-- Thanh điều hướng chọn 5 Theme -->
         <div class="controls">
             <div id="home-theme" class="theme-button">1</div>
             <div id="hacker-theme" class="theme-button">2</div>
@@ -1003,7 +863,7 @@
             <div id="car-theme" class="theme-button">5</div>
         </div>
 
-
+        <!-- Thanh điều khiển Volume và Độ mờ -->
         <div class="top-controls">
             <div class="volume-control">
                 <svg id="volume-icon" class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1021,7 +881,8 @@
         </div>
     </div>
 
-
+    <!-- 9. KHU VỰC THAY ĐỔI LINK NHẠC NỀN THEO TỪNG THEME -->
+    <!-- Thay đường dẫn tại src="..." thành file nhạc .mp3 của bạn nằm trong thư mục assets -->
     <audio id="background-music" loop>
         <source src="assets/background_music.mp3" type="audio/mp3">
     </audio>
@@ -1038,10 +899,10 @@
         <source src="assets/car_music.mp3" type="audio/mp3">
     </audio>
 
-
+    <!-- Thư viện tạo hiệu ứng chuyển động mượt mà (Không được xóa) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-
+    <!-- File điều khiển hiệu ứng chính -->
     <script src="script.js"></script>
 </body>
 </html>
