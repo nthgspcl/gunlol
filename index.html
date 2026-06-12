@@ -23,12 +23,14 @@
             background: url('assets/custom_cursor.png') no-repeat center center;
             background-size: contain;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 999999 !important;
             transform: translate(-50%, -50%);
+            display: block !important;
         }
 
-        body:not(.touch-device) {
-            cursor: none;
+        body:not(.touch-device),
+        body:not(.touch-device) * {{
+            cursor: none !important;
         }
 
         body {
