@@ -1002,6 +1002,41 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/3046/3046124.png" alt="TikTok" class="social-icon">
                     </a>
                 </div>
+                <div class="music-player-box">
+                    <audio id="main-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+                
+                    <img class="music-cover" src="https://media.discordapp.net/attachments/1400893487960031375/1415227978803052604/462255645_1054538539686071_6149848510388302282_n.jpg?ex=6a2cfdc3&is=6a2bac43&hm=ad4c3e45ef7e8c04821b99bf632857111743dfb84c5dc58d9b707ee2262175a3&=&format=webp&width=560&height=968" alt="Music Cover">
+                
+                    <div class="music-info-container">
+                        <div class="music-detail-row">
+                            <span class="music-title">loser</span>
+                            
+                            <div class="music-controls">
+                                <button class="music-btn btn-nav" disabled>
+                                    <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                                </button>
+                                
+                                <button class="music-btn btn-toggle-play" id="play-pause-btn">
+                                    <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    <svg class="icon-pause hidden" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                                </button>
+                                
+                                <button class="music-btn btn-nav" disabled>
+                                    <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-10.5 6l8.5 6V6z" transform="rotate(180 12 12)"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                
+                        <div class="music-progress-row">
+                            <span class="music-time">0:01</span>
+                            <div class="music-progress-bar">
+                                <div class="music-progress-current"></div>
+                                <div class="music-progress-dot"></div>
+                            </div>
+                            <span class="music-time">6:10</span>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- LƯỢT XEM PROFILE (Số này hiện tại đang là tĩnh Fix cứng) -->
                 <div class="visitor-counter">
