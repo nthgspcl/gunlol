@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  const startMessage = "Click here to see the motion baby";
+  const startMessage = "CHAN BỐ MÀY ĐI";
   let startTextContent = '';
   let startIndex = 0;
   let startCursorVisible = true;
