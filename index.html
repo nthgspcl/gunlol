@@ -833,6 +833,48 @@
                     box-sizing: border-box;
                     text-align: left;
                 }
+                    /* Dán đoạn này vào dưới dòng padding: 12px 16px; của .music-player-box */
+                    
+                    .audio-player-timeline {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        margin-top: 8px;
+                        margin-bottom: 5px;
+                        font-family: 'Retro+Gaming', monospace; /* Giữ font retro đồng bộ */
+                        font-size: 11px;
+                        color: rgba(255, 255, 255, 0.8);
+                        width: 100%;
+                    }
+                    
+                    /* Định dạng thanh trượt range mỏng, bo góc */
+                    #music-progress {
+                        flex: 1;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        height: 4px;
+                        background: rgba(255, 255, 255, 0.2);
+                        border-radius: 2px;
+                        outline: none;
+                        cursor: pointer;
+                    }
+                    
+                    /* Nút chấm tròn màu trắng để kéo */
+                    #music-progress::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;
+                        background: #ffffff;
+                        cursor: pointer;
+                        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+                        transition: transform 0.1s ease;
+                    }
+                    
+                    #music-progress::-webkit-slider-thumb:hover {
+                        transform: scale(1.3); /* Phóng to nhẹ khi di chuột vào */
+                    }
             
                 .music-cover {
                     width: 45px;
