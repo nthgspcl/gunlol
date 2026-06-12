@@ -11,7 +11,6 @@ function initMedia() {
   backgroundMusic.volume = 0.3;
   backgroundVideo.muted = true; 
 
-  
   backgroundVideo.play().catch(err => {
     console.error("Failed to play background video:", err);
   });
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const socialIcons = document.querySelectorAll('.social-icon');
   const badges = document.querySelectorAll('.badge');
 
-  
   const cursor = document.querySelector('.custom-cursor');
   const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
@@ -94,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
   const startMessage = "CLICK VÀO ĐÂY CHAN BỐ MÀY ĐI";
   let startTextContent = '';
   let startIndex = 0;
@@ -109,12 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(typeWriterStart, 100);
   }
 
-
   setInterval(() => {
     startCursorVisible = !startCursorVisible;
     startText.textContent = startTextContent + (startCursorVisible ? '|' : ' ');
   }, 500);
-
 
   function initializeVisitorCounter() {
     let totalVisitors = localStorage.getItem('totalVisitorCount');
@@ -135,9 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     visitorCount.textContent = totalVisitors.toLocaleString();
   }
 
-
   initializeVisitorCounter();
-
 
   startScreen.addEventListener('click', () => {
     startScreen.classList.add('hidden');
@@ -200,7 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
     typeWriterBio();
   });
 
-
   const name = "SUNIII";
   let nameText = '';
   let nameIndex = 0;
@@ -233,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
     nameCursorVisible = !nameCursorVisible;
     profileName.textContent = nameText + (nameCursorVisible ? '|' : ' ');
   }, 500);
-
 
   const bioMessages = [
     "Chỉ sợ người thương mình, mình không biết đáp trả thế nào, chứ người tệ với mình thì quá đơn giản rồi.",
@@ -273,7 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
     profileBio.textContent = bioText + (bioCursorVisible ? '|' : ' ');
   }, 500);
 
-
   let currentAudio = backgroundMusic;
   let isMuted = false;
 
@@ -300,7 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
     currentAudio.muted = false;
     volumeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`;
   });
-
 
   transparencySlider.addEventListener('input', () => {
     const opacity = transparencySlider.value;
@@ -354,7 +343,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-
   function switchTheme(videoSrc, audio, themeClass, overlay = null, overlayOverProfile = false) {
     let primaryColor;
     switch (themeClass) {
@@ -384,6 +372,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power2.in',
       onComplete: () => {
         backgroundVideo.src = videoSrc;
+        backgroundVideo.load(); // Kích hoạt trình duyệt load dữ liệu từ link URL video mới
+        backgroundVideo.play().catch(err => console.error("Failed to play background video:", err));
 
         if (currentAudio) {
           currentAudio.pause();
@@ -429,48 +419,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
+  // Bạn hãy thay thế các đoạn chữ tiếng Việt viết hoa dưới đây bằng link .mp4 online tương ứng của bạn nhé:
   homeButton.addEventListener('click', () => {
-    switchTheme('assets/background.mp4', backgroundMusic, 'home-theme');
+    switchTheme('https://cdn.pixabay.com/video/2022/11/14/139010-770938030_large.mp4', backgroundMusic, 'home-theme');
   });
   homeButton.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    switchTheme('assets/background.mp4', backgroundMusic, 'home-theme');
+    switchTheme('https://cdn.pixabay.com/video/2022/11/14/139010-770938030_large.mp4', backgroundMusic, 'home-theme');
   });
 
   hackerButton.addEventListener('click', () => {
-    switchTheme('assets/hacker_background.mp4', hackerMusic, 'hacker-theme', hackerOverlay, false);
+    switchTheme('https://cdn.pixabay.com/video/2023/01/10/146064-788138380_large.mp4', hackerMusic, 'hacker-theme', hackerOverlay, false);
   });
   hackerButton.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    switchTheme('assets/hacker_background.mp4', hackerMusic, 'hacker-theme', hackerOverlay, false);
+    switchTheme('https://cdn.pixabay.com/video/2023/01/10/146064-788138380_large.mp4', hackerMusic, 'hacker-theme', hackerOverlay, false);
   });
 
   rainButton.addEventListener('click', () => {
-    switchTheme('assets/rain_background.mov', rainMusic, 'rain-theme', snowOverlay, true);
+    switchTheme('https://cdn.pixabay.com/video/2021/02/17/65496-514501840_large.mp4', rainMusic, 'rain-theme', snowOverlay, true);
   });
   rainButton.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    switchTheme('assets/rain_background.mov', rainMusic, 'rain-theme', snowOverlay, true);
+    switchTheme('https://cdn.pixabay.com/video/2021/02/17/65496-514501840_large.mp4', rainMusic, 'rain-theme', snowOverlay, true);
   });
 
   animeButton.addEventListener('click', () => {
-    switchTheme('assets/anime_background.mp4', animeMusic, 'anime-theme');
+    switchTheme('https://cdn.pixabay.com/video/2020/04/25/37137-412292784_large.mp4', animeMusic, 'anime-theme');
   });
   animeButton.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    switchTheme('assets/anime_background.mp4', animeMusic, 'anime-theme');
+    switchTheme('https://cdn.pixabay.com/video/2020/04/25/37137-412292784_large.mp4', animeMusic, 'anime-theme');
   });
 
   carButton.addEventListener('click', () => {
-    switchTheme('assets/car_background.mp4', carMusic, 'car-theme');
+    switchTheme('https://cdn.pixabay.com/video/2020/04/25/37137-412292784_large.mp4', carMusic, 'car-theme');
   });
   carButton.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    switchTheme('assets/car_background.mp4', carMusic, 'car-theme');
+    switchTheme('https://cdn.pixabay.com/video/2020/04/25/37137-412292784_large.mp4', carMusic, 'car-theme');
   });
 
- 
   function handleTilt(e, element) {
     const rect = element.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -547,14 +536,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
   profilePicture.addEventListener('mouseenter', () => {
     glitchOverlay.style.opacity = '1';
     setTimeout(() => {
       glitchOverlay.style.opacity = '0';
     }, 500);
   });
-
 
   profilePicture.addEventListener('click', () => {
     profileContainer.classList.remove('fast-orbit');
@@ -581,7 +568,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
   });
 
- 
   let isShowingSkills = false;
   resultsButton.addEventListener('click', () => {
     if (!isShowingSkills) {
@@ -666,7 +652,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-
   typeWriterStart();
 });
-
