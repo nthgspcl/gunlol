@@ -960,50 +960,46 @@
             /* =======================================================
                KẾT THÚC HỘP NHẠC
                ======================================================= */
-/* =======================================================
-   CSS CĂN CHỈNH 5 SỐ CẮT NGANG THANH NGANG VÀ 2 NÚT DƯỚI
-   ======================================================= */
-
-            /* Khung bọc chứa cả 5 số VÀ thanh ngang nền phía sau */
-            .theme-section-wrapper {
+            /* Khung bọc tạo hàng cho cụm số */
+              .custom-theme-wrapper {
                 position: relative;
                 width: 85%;
                 max-width: 420px;
-                margin: 20px auto 10px auto; /* Khoảng cách với hộp nhạc trên */
+                margin: 22px auto 12px auto;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                height: 30px; /* Tạo không gian vừa vặn cho nút tròn */
-            }
+                height: 28px;
+              }
             
-            /* Thanh ngang kẻ mờ làm nền bị cắt ngang */
-            .theme-line-bg {
+              /* Thanh trượt chạy nền phía sau cắt ngang */
+              .custom-line-bg {
                 position: absolute;
                 left: 0;
                 right: 0;
                 top: 50%;
                 transform: translateY(-50%);
-                height: 1px; /* Thanh kẻ ngang siêu mỏng */
-                background: rgba(255, 255, 255, 0.2); /* Độ mờ của thanh cắt ngang */
+                height: 1px;
+                background: rgba(255, 255, 255, 0.15);
                 z-index: 1;
-            }
+              }
             
-            /* Cụm chứa 5 số tròn nằm đè lên thanh ngang */
-            .theme-buttons-container {
+              /* Khung chứa 5 số che thanh trượt để tạo khoảng trống đứt đoạn */
+              .custom-buttons-inside {
                 position: relative;
-                z-index: 2; /* Đẩy nổi lên trên thanh ngang */
+                z-index: 2;
                 display: flex;
-                gap: 12px;
-                background: #141414; /* ĐẶC BIỆT: Màu nền này phải trùng với màu nền web/hộp nhạc của bạn để che thanh ngang đi, tạo cảm giác bị cắt đứt */
-                padding: 0 10px; /* Tạo khoảng trống che thanh ngang 2 bên */
-            }
+                gap: 14px;
+                background: #000000; /* !!! BẮT BUỘC: Điền đúng màu nền đen/tối của trang web bạn để giấu thanh ngang đi nhé !!! */
+                padding: 0 15px;
+              }
             
-            /* Định dạng từng nút số tròn 1 2 3 4 5 */
-            .theme-btn {
-                width: 26px;
-                height: 26px;
+              /* Định dạng các nút số tròn 1 2 3 4 5 */
+              .custom-buttons-inside .theme-btn {
+                width: 24px;
+                height: 24px;
                 border-radius: 50%;
-                border: 1px solid rgba(255, 255, 255, 0.4);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 background: transparent;
                 color: #ffffff;
                 font-family: 'Retro+Gaming', monospace;
@@ -1013,26 +1009,46 @@
                 justify-content: center;
                 cursor: pointer;
                 transition: all 0.2s ease;
-            }
+              }
             
-            .theme-btn:hover {
+              .custom-buttons-inside .theme-btn:hover {
                 background: #ffffff;
                 color: #000000;
-            }
+              }
             
-            /* Khung chứa 2 thanh trượt (Âm lượng & Độ mờ) nằm ở hàng dưới cùng */
-            .sliders-container {
+              /* Khung dưới cùng chứa 2 thanh trượt âm lượng và độ mờ */
+              .custom-sliders-box {
                 width: 85%;
                 max-width: 420px;
-                margin: 15px auto;
+                margin: 15px auto 25px auto;
+                display: flex;
+                justify-content: space-between;
+                gap: 16px;
+              }
+            
+              .custom-slider-item {
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
-                gap: 20px;
-                padding: 8px 16px;
-                background: rgba(20, 20, 20, 0.6); /* Đồng bộ độ trong suốt với hộp nhạc */
+                gap: 10px;
+                flex: 1;
+                background: rgba(20, 20, 20, 0.6);
+                padding: 6px 14px;
                 border-radius: 20px;
-            }
+                border: 1px solid rgba(255, 255, 255, 0.06);
+              }
+            
+              .custom-slider-item svg {
+                width: 15px;
+                height: 15px;
+                fill: #ffffff;
+                opacity: 0.8;
+              }
+            
+              .custom-slider-item input[type="range"] {
+                flex: 1;
+                height: 4px;
+                cursor: pointer;
+              }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="https://media.discordapp.net/attachments/1369734618336722945/1514947329269039294/3213213213.png?ex=6a2d3825&is=6a2be6a5&hm=06c8fc66e92c33e7aa0e1f2ea3b54fbabc41db95ee3ff0d403e71801a14b5039&=&format=webp&quality=lossless&width=90&height=90"
