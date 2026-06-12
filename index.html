@@ -819,140 +819,147 @@
                 fill: currentColor;
                 flex-shrink: 0;
             }
-            /* bắt đầu hộp nhạc */
+                /* =======================================================
+               BẮT ĐẦU HỘP NHẠC (ĐÃ TỐI ƯU TOÀN DIỆN LAYOUT 2 DÒNG)
+               ======================================================= */
             .music-player-box {
-                    display: flex;
-                    align-items: center;
-                    width: 85%; 
-                    max-width: 420px; 
-                    margin: 15px auto; 
-                    background: rgba(20, 20, 20, 0.6); 
-                    border: 1px solid rgba(255, 255, 255, 0.08); 
-                    border-radius: 12px; 
-                    padding: 12px 16px;
-                    box-sizing: border-box;
-                    text-align: left;
-                }
-                
-                .music-cover {
-                    width: 45px;
-                    height: 45px;
-                    border-radius: 10px;
-                    object-fit: cover;
-                    margin-right: 14px;
-                    flex-shrink: 0;
-                }
-                    .music-info-container {
-                        display: flex;
-                        flex-direction: column;
-                        flex-grow: 1;
-                        justify-content: center;
-                      }
-                    
-                      /* Dòng 1: Đẩy chữ sunihihi lên dòng trên độc lập */
-                      .music-title-row {
-                        margin-bottom: 6px;
-                        text-align: left;
-                      }
-                    
-                      .music-title {
-                        color: #ffffff;
-                        font-family: 'Retro+Gaming', 'Courier New', monospace;
-                        font-size: 12pt;
-                        font-weight: bold;
-                        letter-spacing: 0.5px;
-                      }
-                    
-                      /* Dòng 2: Căn chỉnh thanh tiến trình và cụm nút nằm ngang nhau */
-                      .music-controls-row {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        gap: 12px;
-                        width: 100%;
-                      }
-                    
-                      /* Định dạng cụm thanh thời gian chạy */
-                      .audio-player-timeline {
-                        display: flex;
-                        align-items: center;
-                        gap: 8px;
-                        flex-grow: 1;
-                      }
-                    
-                      .audio-player-timeline span {
-                        color: rgba(255, 255, 255, 0.8);
-                        font-family: 'Retro+Gaming', 'Courier New', monospace;
-                        font-size: 11px;
-                        white-space: nowrap;
-                      }
-                    
-                      /* Thanh kéo mỏng kẻ ngang */
-                      #music-progress {
-                        flex-grow: 1;
-                        -webkit-appearance: none;
-                        appearance: none;
-                        height: 4px;
-                        background: rgba(255, 255, 255, 0.2);
-                        border-radius: 2px;
-                        outline: none;
-                        cursor: pointer;
-                        margin: 0;
-                      }
-                    
-                      /* Nút tròn định vị thời gian */
-                      #music-progress::-webkit-slider-thumb {
-                        -webkit-appearance: none;
-                        appearance: none;
-                        width: 10px;
-                        height: 10px;
-                        border-radius: 50%;
-                        background: #ffffff;
-                        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-                        cursor: pointer;
-                      }
-                    
-                      /* Cụm 3 nút điều khiển lùi về góc phải */
-                      .music-controls {
-                        display: flex;
-                        align-items: center;
-                        gap: 6px;
-                        flex-shrink: 0;
-                      }
-                    
-                      .music-btn {
-                        background: none;
-                        border: none;
-                        cursor: pointer;
-                        padding: 2px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                      }
-                    
-                      .music-btn svg {
-                        width: 16px;
-                        height: 16px;
-                        fill: #ffffff;
-                        opacity: 0.7;
-                        transition: opacity 0.2s;
-                      }
-                    
-                      .music-btn:hover svg {
-                        opacity: 1;
-                      }
-                    
-                      .music-btn[disabled] {
-                        cursor: not-allowed;
-                      }
-                    
-                      .music-btn[disabled] svg {
-                        opacity: 0.25;
-                      }
-                    
-                      .hidden {
-                        display: none !important;
-                      }
+                display: flex;
+                align-items: center;
+                width: 85%; 
+                max-width: 420px; 
+                margin: 15px auto; 
+                background: rgba(20, 20, 20, 0.6); 
+                border: 1px solid rgba(255, 255, 255, 0.08); 
+                border-radius: 12px; 
+                padding: 12px 16px;
+                box-sizing: border-box;
+                text-align: left;
+            }
+            
+            .music-cover {
+                width: 45px;
+                height: 45px;
+                border-radius: 10px;
+                object-fit: cover;
+                margin-right: 14px;
+                flex-shrink: 0;
+            }
+            
+            .music-info-container {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                justify-content: center;
+                min-width: 0; /* Ngăn chặn văn bản làm phình hộp nhạc */
+            }
+            
+            /* DÒNG 1: Tên bài hát nằm độc lập ở hàng trên */
+            .music-title-row {
+                margin-bottom: 4px;
+                text-align: left;
+            }
+            
+            .music-title {
+                color: #ffffff;
+                font-family: 'Retro+Gaming', 'Courier New', monospace;
+                font-size: 12pt;
+                font-weight: bold;
+                letter-spacing: 0.5px;
+            }
+            
+            /* DÒNG 2: Thanh tiến trình bên trái và cụm nút bên phải song song */
+            .music-controls-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                width: 100%;
+            }
+            
+            /* Cấu trúc cụm thanh thời gian chạy */
+            .audio-player-timeline {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex-grow: 1; /* Tự động kéo dài tối đa phần không gian bên trái */
+            }
+            
+            .audio-player-timeline span {
+                color: rgba(255, 255, 255, 0.8);
+                font-family: 'Retro+Gaming', 'Courier New', monospace;
+                font-size: 11px;
+                white-space: nowrap;
+            }
+            
+            /* Thanh nhạc trượt ngang mỏng */
+            #music-progress {
+                flex-grow: 1;
+                -webkit-appearance: none;
+                appearance: none;
+                height: 4px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 2px;
+                outline: none;
+                cursor: pointer;
+                margin: 0;
+            }
+            
+            /* Chấm tròn trắng định vị mượt mà */
+            #music-progress::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: #ffffff;
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+                cursor: pointer;
+            }
+            
+            /* Cụm 3 nút bấm điều khiển dồn gọn ghẽ về góc phải cuối dòng */
+            .music-controls {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                flex-shrink: 0; /* Đóng băng kích thước, không cho thanh nhạc bóp méo nút */
+            }
+            
+            .music-btn {
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 2px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .music-btn svg {
+                width: 15px; /* Giảm nhẹ 1px giúp tổng thể thanh nhạc gọn gàng hơn */
+                height: 15px;
+                fill: #ffffff;
+                opacity: 0.7;
+                transition: opacity 0.2s;
+            }
+            
+            .music-btn:hover svg {
+                opacity: 1;
+            }
+            
+            .music-btn[disabled] {
+                cursor: not-allowed;
+            }
+            
+            .music-btn[disabled] svg {
+                opacity: 0.25;
+            }
+            
+            .hidden {
+                display: none !important;
+            }
+            /* =======================================================
+               KẾT THÚC HỘP NHẠC
+               ======================================================= */
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="https://media.discordapp.net/attachments/1369734618336722945/1514947329269039294/3213213213.png?ex=6a2d3825&is=6a2be6a5&hm=06c8fc66e92c33e7aa0e1f2ea3b54fbabc41db95ee3ff0d403e71801a14b5039&=&format=webp&quality=lossless&width=90&height=90"
