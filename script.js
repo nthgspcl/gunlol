@@ -55,6 +55,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const cursor = document.querySelector('.custom-cursor');
   const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
+  // LẤY CÁC PHẦN TỬ CỦA HỘP NHẠC ĐỂ XỬ LÝ TỰ ĐỘNG CHẠY
+  const mainAudio = document.getElementById('main-audio');
+  const playPauseBtn = document.getElementById('play-pause-btn');
+  const iconPlay = playPauseBtn ? playPauseBtn.querySelector('.icon-play') : null;
+  const iconPause = playPauseBtn ? playPauseBtn.querySelector('.icon-pause') : null;
+
+  // Hàm cập nhật giao diện nút bấm Play/Pause của hộp nhạc
+  function updateMusicButtonUI() {
+    if (!playPauseBtn || !iconPlay || !iconPause || !mainAudio) return;
+    if (mainAudio.paused) {
+      iconPlay.classList.remove('hidden');
+      iconPause.classList.add('hidden');
+    } else {
+      iconPlay.classList.add('hidden');
+      iconPause.classList.remove('hidden');
+    }
+  }
+
   if (isTouchDevice) {
     document.body.classList.add('touch-device');
     
@@ -76,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
       cursor.style.display = 'none'; 
     });
   } else {
-
     document.addEventListener('mousemove', (e) => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
@@ -132,12 +149,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initializeVisitorCounter();
 
+  // XỬ LÝ SỰ KIỆN CLICK MÀN HÌNH CHỜ (MÁY TÍNH)
   startScreen.addEventListener('click', () => {
     startScreen.classList.add('hidden');
     backgroundMusic.muted = false;
     backgroundMusic.play().catch(err => {
       console.error("Failed to play music after start screen click:", err);
     });
+
+    // TỰ ĐỘNG CHẠY HỘP NHẠC KHI TRUY CẬP VÀO WEB
+    if (mainAudio) {
+      setTimeout(() => {
+        mainAudio.play().then(() => {
+          updateMusicButtonUI();
+        }).catch(err => {
+          console.log("Hộp nhạc tự động phát bị chặn:", err);
+        });
+      }, 100);
+    }
+
     profileBlock.classList.remove('hidden');
     gsap.fromTo(profileBlock,
       { opacity: 0, y: -50 },
@@ -162,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     typeWriterBio();
   });
 
+  // XỬ LÝ SỰ KIỆN TOUCH MÀN HÌNH CHỜ (ĐIỆN THOẠI)
   startScreen.addEventListener('touchstart', (e) => {
     e.preventDefault();
     startScreen.classList.add('hidden');
@@ -169,6 +200,18 @@ document.addEventListener('DOMContentLoaded', () => {
     backgroundMusic.play().catch(err => {
       console.error("Failed to play music after start screen touch:", err);
     });
+
+    // TỰ ĐỘNG CHẠY HỘP NHẠC KHI TRUY CẬP VÀO WEB
+    if (mainAudio) {
+      setTimeout(() => {
+        mainAudio.play().then(() => {
+          updateMusicButtonUI();
+        }).catch(err => {
+          console.log("Hộp nhạc tự động phát bị chặn:", err);
+        });
+      }, 100);
+    }
+
     profileBlock.classList.remove('hidden');
     gsap.fromTo(profileBlock,
       { opacity: 0, y: -50 },
@@ -192,6 +235,19 @@ document.addEventListener('DOMContentLoaded', () => {
     typeWriterName();
     typeWriterBio();
   });
+
+  // XỬ LÝ SỰ KIỆN KHẤN NÚT PLAY/PAUSE Ở HỘP NHẠC TRỰC TIẾP
+  if (playPauseBtn && mainAudio) {
+    playPauseBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Không làm kích hoạt các hiệu ứng click nền bên ngoài
+      if (mainAudio.paused) {
+        mainAudio.play();
+      } else {
+        mainAudio.pause();
+      }
+      updateMusicButtonUI();
+    });
+  }
 
   const name = "SUNIII";
   let nameText = '';
@@ -271,386 +327,4 @@ document.addEventListener('DOMContentLoaded', () => {
     isMuted = !isMuted;
     currentAudio.muted = isMuted;
     volumeIcon.innerHTML = isMuted
-      ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>`
-      : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`;
-  });
-
-  volumeIcon.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    isMuted = !isMuted;
-    currentAudio.muted = isMuted;
-    volumeIcon.innerHTML = isMuted
-      ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>`
-      : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`;
-  });
-
-  volumeSlider.addEventListener('input', () => {
-    currentAudio.volume = volumeSlider.value;
-    isMuted = false;
-    currentAudio.muted = false;
-    volumeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`;
-  });
-
-  transparencySlider.addEventListener('input', () => {
-    const opacity = transparencySlider.value;
-    if (opacity == 0) {
-      profileBlock.style.background = 'rgba(0, 0, 0, 0)';
-      profileBlock.style.borderOpacity = '0';
-      profileBlock.style.borderColor = 'transparent';
-      profileBlock.style.backdropFilter = 'none';
-      skillsBlock.style.background = 'rgba(0, 0, 0, 0)';
-      skillsBlock.style.borderOpacity = '0';
-      skillsBlock.style.borderColor = 'transparent';
-      skillsBlock.style.backdropFilter = 'none';
-   
-      profileBlock.style.pointerEvents = 'auto';
-      socialIcons.forEach(icon => {
-        icon.style.pointerEvents = 'auto';
-        icon.style.opacity = '1';
-      });
-      badges.forEach(badge => {
-        badge.style.pointerEvents = 'auto';
-        badge.style.opacity = '1';
-      });
-      profilePicture.style.pointerEvents = 'auto';
-      profilePicture.style.opacity = '1';
-      profileName.style.opacity = '1';
-      profileBio.style.opacity = '1';
-      visitorCount.style.opacity = '1';
-    } else {
-      profileBlock.style.background = `rgba(0, 0, 0, ${opacity})`;
-      profileBlock.style.borderOpacity = opacity;
-      profileBlock.style.borderColor = '';
-      profileBlock.style.backdropFilter = `blur(${10 * opacity}px)`;
-      skillsBlock.style.background = `rgba(0, 0, 0, ${opacity})`;
-      skillsBlock.style.borderOpacity = opacity;
-      skillsBlock.style.borderColor = '';
-      skillsBlock.style.backdropFilter = `blur(${10 * opacity}px)`;
-      profileBlock.style.pointerEvents = 'auto';
-      socialIcons.forEach(icon => {
-        icon.style.pointerEvents = 'auto';
-        icon.style.opacity = '1';
-      });
-      badges.forEach(badge => {
-        badge.style.pointerEvents = 'auto';
-        badge.style.opacity = '1';
-      });
-      profilePicture.style.pointerEvents = 'auto';
-      profilePicture.style.opacity = '1';
-      profileName.style.opacity = '1';
-      profileBio.style.opacity = '1';
-      visitorCount.style.opacity = '1';
-    }
-  });
-
-  function switchTheme(videoSrc, audio, themeClass, overlay = null, overlayOverProfile = false) {
-    let primaryColor;
-    switch (themeClass) {
-      case 'home-theme':
-        primaryColor = '#00CED1';
-        break;
-      case 'hacker-theme':
-        primaryColor = '#22C55E';
-        break;
-      case 'rain-theme':
-        primaryColor = '#1E3A8A';
-        break;
-      case 'anime-theme':
-        primaryColor = '#DC2626';
-        break;
-      case 'car-theme':
-        primaryColor = '#EAB308';
-        break;
-      default:
-        primaryColor = '#00CED1';
-    }
-    document.documentElement.style.setProperty('--primary-color', primaryColor);
-
-    gsap.to(backgroundVideo, {
-      opacity: 0,
-      duration: 0.5,
-      ease: 'power2.in',
-      onComplete: () => {
-        backgroundVideo.src = videoSrc;
-        backgroundVideo.load(); // Kích hoạt trình duyệt load dữ liệu từ link URL video mới
-        backgroundVideo.play().catch(err => console.error("Failed to play background video:", err));
-
-        if (currentAudio) {
-          currentAudio.pause();
-          currentAudio.currentTime = 0;
-        }
-        currentAudio = audio;
-        currentAudio.volume = volumeSlider.value;
-        currentAudio.muted = isMuted;
-        currentAudio.play().catch(err => console.error("Failed to play theme music:", err));
-
-        document.body.classList.remove('home-theme', 'hacker-theme', 'rain-theme', 'anime-theme', 'car-theme');
-        document.body.classList.add(themeClass);
-
-        hackerOverlay.classList.add('hidden');
-        snowOverlay.classList.add('hidden');
-        profileBlock.style.zIndex = overlayOverProfile ? 10 : 20;
-        skillsBlock.style.zIndex = overlayOverProfile ? 10 : 20;
-        if (overlay) {
-          overlay.classList.remove('hidden');
-        }
-
-        if (themeClass === 'hacker-theme') {
-          resultsButtonContainer.classList.remove('hidden');
-        } else {
-          resultsButtonContainer.classList.add('hidden');
-          skillsBlock.classList.add('hidden');
-          resultsHint.classList.add('hidden');
-          profileBlock.classList.remove('hidden');
-          gsap.to(profileBlock, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' });
-        }
-
-        gsap.to(backgroundVideo, {
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-          onComplete: () => {
-            profileContainer.classList.remove('orbit');
-            void profileContainer.offsetWidth;
-            profileContainer.classList.add('orbit');
-          }
-        });
-      }
-    });
-  }
-
-  // Bạn hãy thay thế các đoạn chữ tiếng Việt viết hoa dưới đây bằng link .mp4 online tương ứng của bạn nhé:
-  homeButton.addEventListener('click', () => {
-    switchTheme('https://cdn.pixabay.com/video/2022/11/14/139010-770938030_large.mp4', backgroundMusic, 'home-theme');
-  });
-  homeButton.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    switchTheme('https://cdn.pixabay.com/video/2022/11/14/139010-770938030_large.mp4', backgroundMusic, 'home-theme');
-  });
-
-  hackerButton.addEventListener('click', () => {
-    switchTheme('https://cdn.pixabay.com/video/2023/01/10/146064-788138380_large.mp4', hackerMusic, 'hacker-theme', hackerOverlay, false);
-  });
-  hackerButton.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    switchTheme('https://cdn.pixabay.com/video/2023/01/10/146064-788138380_large.mp4', hackerMusic, 'hacker-theme', hackerOverlay, false);
-  });
-
-  rainButton.addEventListener('click', () => {
-    switchTheme('https://cdn.pixabay.com/video/2021/02/17/65496-514501840_large.mp4', rainMusic, 'rain-theme', snowOverlay, true);
-  });
-  rainButton.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    switchTheme('https://cdn.pixabay.com/video/2021/02/17/65496-514501840_large.mp4', rainMusic, 'rain-theme', snowOverlay, true);
-  });
-
-  animeButton.addEventListener('click', () => {
-    switchTheme('https://cdn.pixabay.com/video/2020/04/25/37137-412292784_large.mp4', animeMusic, 'anime-theme');
-  });
-  animeButton.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    switchTheme('https://cdn.pixabay.com/video/2020/04/25/37137-412292784_large.mp4', animeMusic, 'anime-theme');
-  });
-
-  carButton.addEventListener('click', () => {
-    switchTheme('https://cdn.pixabay.com/video/2020/04/25/37137-412292784_large.mp4', carMusic, 'car-theme');
-  });
-  carButton.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    switchTheme('https://cdn.pixabay.com/video/2020/04/25/37137-412292784_large.mp4', carMusic, 'car-theme');
-  });
-
-  function handleTilt(e, element) {
-    const rect = element.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    let clientX, clientY;
-
-    if (e.type === 'touchmove') {
-      clientX = e.touches[0].clientX;
-      clientY = e.touches[0].clientY;
-    } else {
-      clientX = e.clientX;
-      clientY = e.clientY;
-    }
-
-    const mouseX = clientX - centerX;
-    const mouseY = clientY - centerY;
-
-    const maxTilt = 15;
-    const tiltX = (mouseY / rect.height) * maxTilt;
-    const tiltY = -(mouseX / rect.width) * maxTilt;
-
-    gsap.to(element, {
-      rotationX: tiltX,
-      rotationY: tiltY,
-      duration: 0.3,
-      ease: 'power2.out',
-      transformPerspective: 1000
-    });
-  }
-
-  profileBlock.addEventListener('mousemove', (e) => handleTilt(e, profileBlock));
-  profileBlock.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-    handleTilt(e, profileBlock);
-  });
-
-  skillsBlock.addEventListener('mousemove', (e) => handleTilt(e, skillsBlock));
-  skillsBlock.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-    handleTilt(e, skillsBlock);
-  });
-
-  profileBlock.addEventListener('mouseleave', () => {
-    gsap.to(profileBlock, {
-      rotationX: 0,
-      rotationY: 0,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
-  });
-  profileBlock.addEventListener('touchend', () => {
-    gsap.to(profileBlock, {
-      rotationX: 0,
-      rotationY: 0,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
-  });
-
-  skillsBlock.addEventListener('mouseleave', () => {
-    gsap.to(skillsBlock, {
-      rotationX: 0,
-      rotationY: 0,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
-  });
-  skillsBlock.addEventListener('touchend', () => {
-    gsap.to(skillsBlock, {
-      rotationX: 0,
-      rotationY: 0,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
-  });
-
-  profilePicture.addEventListener('mouseenter', () => {
-    glitchOverlay.style.opacity = '1';
-    setTimeout(() => {
-      glitchOverlay.style.opacity = '0';
-    }, 500);
-  });
-
-  profilePicture.addEventListener('click', () => {
-    profileContainer.classList.remove('fast-orbit');
-    profileContainer.classList.remove('orbit');
-    void profileContainer.offsetWidth;
-    profileContainer.classList.add('fast-orbit');
-    setTimeout(() => {
-      profileContainer.classList.remove('fast-orbit');
-      void profileContainer.offsetWidth;
-      profileContainer.classList.add('orbit');
-    }, 500);
-  });
-
-  profilePicture.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    profileContainer.classList.remove('fast-orbit');
-    profileContainer.classList.remove('orbit');
-    void profileContainer.offsetWidth;
-    profileContainer.classList.add('fast-orbit');
-    setTimeout(() => {
-      profileContainer.classList.remove('fast-orbit');
-      void profileContainer.offsetWidth;
-      profileContainer.classList.add('orbit');
-    }, 500);
-  });
-
-  let isShowingSkills = false;
-  resultsButton.addEventListener('click', () => {
-    if (!isShowingSkills) {
-      gsap.to(profileBlock, {
-        x: -100,
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.in',
-        onComplete: () => {
-          profileBlock.classList.add('hidden');
-          skillsBlock.classList.remove('hidden');
-          gsap.fromTo(skillsBlock,
-            { x: 100, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }
-          );
-          gsap.to(pythonBar, { width: '87%', duration: 2, ease: 'power2.out' });
-          gsap.to(cppBar, { width: '75%', duration: 2, ease: 'power2.out' });
-          gsap.to(csharpBar, { width: '80%', duration: 2, ease: 'power2.out' });
-        }
-      });
-      resultsHint.classList.remove('hidden');
-      isShowingSkills = true;
-    } else {
-      gsap.to(skillsBlock, {
-        x: 100,
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.in',
-        onComplete: () => {
-          skillsBlock.classList.add('hidden');
-          profileBlock.classList.remove('hidden');
-          gsap.fromTo(profileBlock,
-            { x: -100, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }
-          );
-        }
-      });
-      resultsHint.classList.add('hidden');
-      isShowingSkills = false;
-    }
-  });
-
-  resultsButton.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    if (!isShowingSkills) {
-      gsap.to(profileBlock, {
-        x: -100,
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.in',
-        onComplete: () => {
-          profileBlock.classList.add('hidden');
-          skillsBlock.classList.remove('hidden');
-          gsap.fromTo(skillsBlock,
-            { x: 100, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }
-          );
-          gsap.to(pythonBar, { width: '87%', duration: 2, ease: 'power2.out' });
-          gsap.to(cppBar, { width: '75%', duration: 2, ease: 'power2.out' });
-          gsap.to(csharpBar, { width: '80%', duration: 2, ease: 'power2.out' });
-        }
-      });
-      resultsHint.classList.remove('hidden');
-      isShowingSkills = true;
-    } else {
-      gsap.to(skillsBlock, {
-        x: 100,
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.in',
-        onComplete: () => {
-          skillsBlock.classList.add('hidden');
-          profileBlock.classList.remove('hidden');
-          gsap.fromTo(profileBlock,
-            { x: -100, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }
-          );
-        }
-      });
-      resultsHint.classList.add('hidden');
-      isShowingSkills = false;
-    }
-  });
-
-  typeWriterStart();
-});
+      ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2
