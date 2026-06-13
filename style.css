@@ -1,876 +1,443 @@
 /* ========================================================
-
    1. CẤU HÌNH BIẾN TOÀN CỤC & RESET ĐỊNH DẠNG
-
    ======================================================== */
-
 :root {
-
   --primary-color: #00CED1; 
-
   --secondary-color: #FF6B9E;
-
   --background-dark: #0A0A1A;
-
   --text-color: #E0E0FF;
-
 }
-
-
 
 * {
-
   margin: 0;
-
   padding: 0;
-
   box-sizing: border-box;
-
   transition: all 0.3s ease;
-
 }
 
-
+html, body {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
 body {
-
   font-family: 'Space Mono', monospace;
-
   background: var(--background-dark);
-
   color: var(--text-color);
-
   overflow-x: hidden;
-
   overflow-y: auto;
-
   perspective: 1000px;
-
   cursor: none;
-
 }
-
-
 
 /* Con trỏ chuột tùy biến */
-
 .custom-cursor {
-
   position: fixed;
-
   width: 32px;
-
   height: 32px;
-
   background: url('assets/custom_cursor.png') no-repeat center center;
-
   background-size: contain;
-
   pointer-events: none;
-
   z-index: 10000;
-
   transition: transform 0.1s ease-out;
-
   filter: hue-rotate(var(--cursor-hue, 0deg)); 
-
 }
-
-
 
 /* ========================================================
-
    2. DANH SÁCH GIAO DIỆN THEME (BODYS)
-
    ======================================================== */
-
 body.home-theme {
-
   --primary-gradient: from-purple-400;
-
   --secondary-gradient: to-pink-600;
-
   --primary-color: #00CED1; 
-
   --secondary-color: #FF6B9E;
-
   --cursor-hue: 180deg; 
-
 }
-
-
 
 body.hacker-theme {
-
   --primary-gradient: from-green-500;
-
   --secondary-gradient: to-teal-600;
-
   --primary-color: #22C55E; 
-
   --secondary-color: #2DD4BF;
-
   --cursor-hue: 120deg; 
-
 }
-
-
 
 body.rain-theme {
-
   --primary-gradient: from-blue-800;
-
   --secondary-gradient: to-blue-600;
-
   --primary-color: #1E3A8A; 
-
   --secondary-color: #2563EB;
-
   --cursor-hue: 240deg; 
-
 }
-
-
 
 body.anime-theme {
-
   --primary-gradient: from-red-600;
-
   --secondary-gradient: to-red-400;
-
   --primary-color: #DC2626; 
-
   --secondary-color: #F87171;
-
   --cursor-hue: 0deg; 
-
 }
-
-
 
 body.car-theme {
-
   --primary-gradient: from-yellow-500;
-
   --secondary-gradient: to-yellow-300;
-
   --primary-color: #EAB308; 
-
   --secondary-color: #FACC15;
-
   --cursor-hue: 60deg; 
-
 }
-
-
 
 /* ========================================================
-
    3. HIỆU ỨNG NỀN & OVERLAY (VIDEO, TUYẾT, GLITCH)
-
    ======================================================== */
-
 .video-background {
-
   transform: scale(1.02);
-
 }
-
-
 
 #hacker-overlay {
-
   mix-blend-mode: screen;
-
   opacity: 0.7;
-
 }
-
-
 
 #snow-overlay {
-
   z-index: 15;
-
   opacity: 0.8;
-
 }
 
-
-
+#background-video, 
 .glitch-overlay {
-
   pointer-events: none;
-
-  position: fixed;
-
-  top: 0;
-
-  left: 0;
-
-  width: 100%;
-
-  height: 100%;
-
-  background: transparent;
-
-  opacity: 0;
-
-  z-index: 20;
-
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: cover !important;
+  z-index: -1 !important;
   mix-blend-mode: color-dodge;
-
 }
-
-
 
 /* ========================================================
-
    4. KHỐI TỔNG QUÁT BLOCK (PROFILE & SKILLS)
-
    ======================================================== */
+.container {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important; /* Căn giữa card theo chiều dọc trên PC */
+  gap: 20px !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  z-index: 10;
+}
 
 #profile-block, #skills-block {
-
   transform-style: preserve-3d;
-
   transition: transform 0.5s ease-out, background 0.3s ease, border-opacity 0.3s ease, backdrop-filter 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
-
-  width: 640px;
-
-  max-width: 90vw;
-
+  width: 640px !important;
+  max-width: 90vw !important;
+  box-sizing: border-box !important;
 }
-
-
 
 #profile-block.profile-appear {
-
   animation: slideInFade 1s ease-out forwards;
-
 }
-
-
 
 @keyframes slideInFade {
-
   0% {
-
     opacity: 0;
-
     transform: translate(-50%, -40%);
-
   }
-
   100% {
-
     opacity: 1;
-
     transform: translate(-50%, -50%);
-
   }
-
 }
-
-
 
 /* ========================================================
-
    5. THÀNH PHẦN CHI TIẾT TRONG PROFILE
-
    ======================================================== */
-
 /* Avatar Orbit */
-
 .profile-container {
-
   position: relative;
-
   transform-style: preserve-3d;
-
 }
-
-
 
 .profile-container::after {
-
   content: '';
-
   position: absolute;
-
   top: -5px;
-
   left: -5px;
-
   right: -5px;
-
   bottom: -5px;
-
   border-radius: 50%;
-
   background: radial-gradient(
-
     circle at 10px 10px,
-
     var(--primary-color) 15%,
-
     transparent 25%
-
   );
-
   animation: orbit 3s linear infinite;
-
   z-index: -1;
-
   filter: blur(2px);
-
   box-shadow: 0 0 10px var(--primary-color);
-
 }
-
-
 
 .profile-container.fast-orbit::after {
-
   animation: fast-orbit 0.5s linear forwards;
-
 }
-
-
 
 /* Tên & Tiểu sử */
-
 #profile-name {
-
   font-family: 'Orbitron', sans-serif !important;
-
   font-weight: 700;
-
   font-size: 32px;
-
   text-align: center;
-
   letter-spacing: 3px;
-
   color: #fff;
-
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.4);
-
 }
-
-
 
 .name-gradient {
-
   background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-
 }
-
-
 
 #profile-bio {
-
   font-family: 'Courier New', monospace;
-
 }
-
-
 
 /* Mạng xã hội (Social Links) */
-
 .social-links {
-
   display: flex;
-
   gap: 12px;
-
   background: rgba(0, 0, 0, 0.3);
-
   border-radius: 20px;
-
   padding: 8px 12px;
-
   backdrop-filter: blur(5px);
-
 }
-
-
 
 .social-icon {
-
   display: inline-block;
-
   position: relative;
-
   overflow: hidden;
-
   border-radius: 50%;
-
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-
   pointer-events: auto;
-
   transition: transform 0.3s ease;
-
 }
-
-
 
 .social-icon:hover,
-
 .social-icon:active {
-
   transform: scale(1.4) rotateY(15deg);
-
 }
-
-
 
 .social-icon::before {
-
   content: '';
-
   position: absolute;
-
   top: -50%;
-
   left: -50%;
-
   width: 200%;
-
   height: 200%;
-
   background: linear-gradient(
-
     0deg, 
-
     transparent, 
-
     var(--primary-color), 
-
     var(--secondary-color)
-
   );
-
   transform-origin: bottom right;
-
   animation: shine 3s linear infinite;
-
   opacity: 0;
-
   transition: opacity 0.5s;
-
 }
-
-
 
 .social-icon:hover::before,
-
 .social-icon:active::before {
-
   opacity: 0.3;
-
 }
-
-
 
 /* Nút chọn giao diện chính */
-
 #home-theme, #hacker-theme, #rain-theme, #anime-theme, #car-theme, #results-theme {
-
   background-image: linear-gradient(to bottom right, var(--primary-color), var(--secondary-color));
-
   touch-action: manipulation;
-
 }
-
-
 
 /* ========================================================
-
    6. ĐƯỜNG VIỀN & VIỀN LED HIỆU ỨNG
-
    ======================================================== */
-
 .border-theme, .social-border, .profile-border {
-
   border-color: var(--primary-color);
-
 }
-
-
 
 .profilschein {
-
   background-image: linear-gradient(to bottom right, var(--primary-color), var(--secondary-color));
-
 }
-
-
 
 .animated-border {
-
   position: relative;
-
 }
-
-
 
 .animated-border::before {
-
   content: '';
-
   position: absolute;
-
   top: -4px;
-
   left: -4px;
-
   right: -4px;
-
   bottom: -4px;
-
   border: 2px solid transparent;
-
   border-radius: inherit;
-
   background: conic-gradient(
-
     from 0deg,
-
     var(--primary-color) 0.8,
-
     var(--secondary-color) 0.8,
-
     var(--primary-color) 0.8
-
   );
-
   animation: border-spin 2s linear infinite;
-
   z-index: -1;
-
 }
-
-
 
 .led-border {
-
   position: relative;
-
   border: 2px solid transparent;
-
 }
-
-
 
 .led-border::before {
-
   content: '';
-
   position: absolute;
-
   top: -4px;
-
   left: -4px;
-
   right: -4px;
-
   bottom: -4px;
-
   border-radius: inherit;
-
   background: linear-gradient(
-
     90deg,
-
     transparent 0%,
-
     var(--primary-color) 20%,
-
     var(--secondary-color) 40%,
-
     transparent 60%
-
   );
-
   background-size: 400%;
-
   animation: led-glow 4s ease-in-out infinite;
-
   z-index: -1;
-
 }
-
-
 
 /* Bộ đếm lượt xem (Visitor) */
-
 .visitor-icon {
-
   stroke: var(--primary-color);
-
 }
-
-
 
 .visitor-count {
-
   color: var(--primary-color);
-
 }
 
-
-
 /* ========================================================
-
-   7. BỔ SUNG: CĂN CHỈNH KHỐI ĐỔI THEME (ÉP VỀ TÂM GIỮA BOX CHUẨN ĐÚNG Ý)
-
+   7. ẨN HOÀN TOÀN CỤM ĐỔI THEME 1 2 3 4 5 RÁC
    ======================================================== */
+.custom-theme-wrapper,
+.custom-line-bg,
+.custom-buttons-inside,
+.custom-buttons-inside.controls,
+.theme-button, 
+.theme-btn {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
 /* ========================================================
-   7. CĂN CHỈNH KHỐI ĐỔI THEME (PULL VỀ GÓC PHẢI THANH SLIDERS)
-   ======================================================== */
-.custom-theme-wrapper {
-    position: absolute !important;
-    right: 15px !important;  /* Ghim sát rìa bên phải dải sliders đen */
-    top: 50% !important;
-    transform: translateY(-50%) !important; /* Căn giữa dọc chuẩn xác */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: auto !important;
-    height: 32px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    z-index: 100 !important;
-}
-
-/* Thanh kẻ ngang nhỏ đâm xuyên qua các số */
-.custom-line-bg {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 1px;
-    background: rgba(255, 255, 255, 0.15) !important;
-    z-index: 1;
-}
-
-/* Khối bọc các nút số */
-.custom-buttons-inside {
-    position: relative;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 8px !important; /* Khoảng cách vừa vặn giữa các vòng tròn số */
-    z-index: 2;
-    background: transparent !important;
-}
-
-/* Định dạng chuẩn nút tròn số 1 2 3 4 5 mảnh mai gốc */
-.theme-button, .theme-btn {
-    width: 20px !important;  /* Thu nhỏ đường kính để vừa khít thanh sliders */
-    height: 20px !important;
-    border-radius: 50% !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    background: #09090d !important; /* Đổ nền tối đặc che dải line chạy phía sau */
-    color: rgba(255, 255, 255, 0.7) !important;
-    font-family: 'Retro Gaming', sans-serif !important;
-    font-size: 9px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer;
-    padding: 0 !important;
-    transition: all 0.2s ease;
-}
-
-/* Hiệu ứng tương tác chuột */
-.theme-button:hover,
-.theme-btn:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;
-    border-color: #ffffff !important;
-}
-
-.theme-button.active,
-.theme-btn.active {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border-color: #ffffff !important;
-    font-weight: bold !important;
-}
-
-
-
-/* ========================================================
-
    8. BỔ SUNG: 2 THANH KÉO (SLIDERS BOX) DƯỚI ĐÁY BOX TỔNG
-
    ======================================================== */
-
 .custom-sliders-box {
-
   position: relative;
-
   display: flex !important;
-
   justify-content: center !important;
-
   align-items: center !important;
-
   gap: 24px;
-
   width: 100% !important;
-
   max-width: 420px;
-
-  margin: 5px auto 20px auto !important; /* Nằm ngay dưới cụm nút số */
-
+  margin: 5px auto 20px auto !important; 
   padding: 8px 16px;
-
   background: rgba(20, 20, 20, 0.5) !important; 
-
   border: 1px solid rgba(255, 255, 255, 0.05);
-
   border-radius: 20px;
-
   backdrop-filter: blur(5px);
-
   -webkit-backdrop-filter: blur(5px);
-
   z-index: 29;
-
+  box-sizing: border-box !important;
 }
-
-
 
 /* Từng item cụm [Icon + Thanh trượt] */
-
 .custom-slider-item {
-
   display: flex !important;
-
   align-items: center !important;
-
   gap: 8px;
-
   background: transparent !important;
-
 }
-
-
 
 /* Định dạng cấu trúc thanh trượt */
-
 .volume-slider, 
-
 .opacity-slider,
-
 .slider {
-
   -webkit-appearance: none;
-
   appearance: none;
-
   background: rgba(255, 255, 255, 0.2) !important;
-
   outline: none;
-
   width: 110px;
-
   height: 4px;
-
   border-radius: 2px;
-
   cursor: pointer;
-
 }
-
-
 
 /* Định dạng con nút kéo tròn màu trắng */
-
 .volume-slider::-webkit-slider-thumb, 
-
 .opacity-slider::-webkit-slider-thumb,
-
 .slider::-webkit-slider-thumb {
-
   -webkit-appearance: none;
-
   appearance: none;
-
   width: 12px;
-
   height: 12px;
-
   background: #ffffff !important;
-
   border-radius: 50% !important;
-
   cursor: grab;
-
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-
 }
-
-
 
 .volume-slider::-webkit-slider-thumb:active, 
-
 .opacity-slider::-webkit-slider-thumb:active,
-
 .slider::-webkit-slider-thumb:active {
-
   cursor: grabbing;
-
   transform: scale(1.2);
-
 }
-
-
 
 /* Biểu tượng SVG của icon volume và opacity */
-
 .custom-slider-item svg,
-
 .volume-icon,
-
 .transparency-icon {
-
   width: 16px !important;
-
   height: 16px !important;
-
   fill: none !important;
-
   stroke: var(--primary-color) !important;
-
   stroke-width: 2 !important;
-
   flex-shrink: 0;
-
 }
 
-
-
 .custom-slider-item:hover svg,
-
 .volume-control:hover svg,
-
 .transparency-control:hover svg {
-
   stroke: var(--secondary-color) !important;
-
 }
 
 /* ==========================================================================
-   TỔNG HỢP TOÀN BỘ CSS TỐI ƯU RESPONSIVE MOBILE (XÓA ĐOẠN CŨ VÀ PASTE ĐOẠN NÀY)
+   9. TỔNG HỢP TOÀN BỘ CSS TỐI ƯU RESPONSIVE MOBILE TRÁNH LỖI PHÂN GIẢI
    ========================================================================== */
 @media screen and (max-width: 768px) {
-    /* 1. Reset khung hiển thị: Cho phép cuộn trang tự nhiên nếu màn hình nhỏ */
+    /* Cho phép cuộn trang tự nhiên trên màn hình dọc */
     html, body {
         width: 100% !important;
         height: auto !important;
@@ -880,7 +447,7 @@ body.car-theme {
         position: relative !important;
     }
 
-    /* 2. Ghim chặt Video/Ảnh nền chạy chìm phía dưới, không đẩy khoảng trống trắng */
+    /* Ghim chặt Video/Ảnh nền không cho đẩy trống dòng */
     #background-video, 
     .glitch-overlay {
         position: fixed !important;
@@ -889,34 +456,24 @@ body.car-theme {
         width: 100vw !important;
         height: 100vh !important;
         object-fit: cover !important;
-        z-index: -100 !important;
     }
 
-    /* 3. Khối container chính: Đẩy nội dung lên sát đỉnh màn hình ngay khi load trang */
+    /* Đẩy card lên đầu màn hình ngay khi vừa load web xong */
     .container {
-        position: relative !important;
-        width: 100% !important;
-        height: auto !important;
-        min-height: 100vh !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important; /* Hiện ngay thông tin, không bắt cuộn xa */
-        align-items: center !important;
-        padding: 35px 12px 24px 12px !important; /* Padding trên vừa phải để né tai thỏ điện thoại */
+        justify-content: flex-start !important; 
+        padding: 40px 12px 24px 12px !important; 
         gap: 14px !important;
-        box-sizing: border-box !important;
     }
 
-    /* 4. Khối Profile Block chính: Co giãn ôm khít bề ngang màn hình điện thoại */
-    #profile-block {
+    /* Card profile và sliders tự giãn vừa khít bề ngang mobile */
+    #profile-block,
+    .custom-sliders-box {
         width: 100% !important;
         max-width: 100% !important;
-        margin: 0 !important; /* Triệt tiêu hoàn toàn margin đẩy khoảng trống */
-        padding: 16px !important;
-        box-sizing: border-box !important;
+        margin: 0 !important;
     }
 
-    /* Thu nhỏ Avatar và Header vừa vặn mobile */
+    /* Thu nhỏ các thành phần text và avatar vừa vặn màn hình */
     .profile-header {
         gap: 12px !important;
     }
@@ -939,7 +496,7 @@ body.car-theme {
         margin: 12px 0 !important;
     }
 
-    /* 5. SỬA TRIỆT ĐỂ LỖI VỠ ẢNH ICON BADGE HÀNG DỌC TRÊN MOBILE */
+    /* SỬA LỖI ICON BADGE BỊ XẾP HÀNG DỌC (Ảnh lỗi image_09ab89.jpg) */
     .badge-box-inner {
         padding: 2px 6px !important;
         max-width: 100% !important;
@@ -947,7 +504,7 @@ body.car-theme {
 
     .badge-group {
         display: flex !important;
-        flex-wrap: wrap !important; /* Tự động xếp hàng ngang, tự xuống dòng nếu quá dài */
+        flex-wrap: wrap !important; /* Tự động xếp hàng ngang, xuống dòng nếu quá dài */
         gap: 4px !important;
     }
 
@@ -956,8 +513,9 @@ body.car-theme {
         height: 14px !important;
     }
 
-    /* 6. Tối ưu khối Discord Info */
-    .discord-status-box {
+    /* Co gọn khối Discord Info & Music Player */
+    .discord-status-box,
+    .music-player-box {
         padding: 10px !important;
         gap: 10px !important;
     }
@@ -980,12 +538,6 @@ body.car-theme {
         font-size: 10px !important;
     }
 
-    /* 7. Tối ưu khối Music Player */
-    .music-player-box {
-        padding: 10px !important;
-        gap: 10px !important;
-    }
-
     .music-cover {
         width: 40px !important;
         height: 40px !important;
@@ -995,13 +547,8 @@ body.car-theme {
         font-size: 10px !important;
     }
 
-    /* 8. Tối ưu khối Sliders (Volume & Opacity) nằm ngay dưới card profile */
     .custom-sliders-box {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin-top: 0 !important;
         padding: 12px !important;
-        box-sizing: border-box !important;
     }
 
     .custom-slider-item {
@@ -1009,12 +556,6 @@ body.car-theme {
     }
 
     .top-controls .slider {
-        height: 5px !important; /* Làm thanh trượt dày hơn một chút trên mobile để dễ vuốt chạm */
-    }
-
-    /* Ẩn triệt để cụm nút số 12345 thừa nếu class cũ còn sót */
-    .custom-buttons-inside.controls,
-    .custom-theme-wrapper {
-        display: none !important;
+        height: 5px !important; /* Dày hơn một chút để dễ vuốt chạm cảm ứng */
     }
 }
