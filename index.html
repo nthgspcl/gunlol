@@ -1206,74 +1206,40 @@
 
 
 
-       /* ========================================================
-   TỔNG HỢP RESPONSIVE MOBILE (THAY THẾ ĐOẠN CŨ)
-   ======================================================== */
-@media screen and (max-width: 768px) {
-    /* 1. Reset khung hiển thị */
-    html, body {
-        width: 100% !important;
-        height: auto !important;
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
+@media (max-width: 430px) {
+    /* 1. Đảm bảo toàn bộ khung chứa không bị lệch */
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
     }
 
-    /* 2. Ghim nền cố định */
-    #background-video, .glitch-overlay {
-        position: fixed !important;
-        top: 0; left: 0;
-        width: 100vw !important;
-        height: 100vh !important;
-        object-fit: cover !important;
-        z-index: -1 !important;
-    }
-
-    /* 3. Đẩy nội dung lên đầu không bị cuộn xa */
-    .container {
-        justify-content: flex-start !important;
-        padding: 30px 15px !important;
-    }
-
-    /* 4. Tối ưu hóa khối Profile/Skills */
+    /* 2. Reset lại khối chứa chính để nó tự căn giữa */
     #profile-block, #skills-block {
-        width: 100% !important;
-        max-width: 400px !important;
-        transform: none !important;
-        position: relative !important;
+        width: 90vw !important;
+        max-width: 350px !important;
+        position: relative !important; /* Thay vì absolute/fixed */
         top: 0 !important;
         left: 0 !important;
-        margin: 0 auto !important;
+        transform: none !important;
+        margin: 20px auto !important; /* Tự động căn giữa theo chiều ngang */
+        min-height: auto !important;
     }
 
-    /* 5. Discord status box - Mobile Layout */
+    /* 3. Xử lý phần Discord Status Box */
     .discord-status-box {
-        display: flex;
-        flex-direction: column;
         width: 100% !important;
-        max-width: 400px !important;
-        margin: 12px auto !important;
-        padding: 12px !important;
+        margin: 10px auto !important;
     }
 
-    .discord-bottom-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 6px !important;
+    /* 4. Ẩn các phần không cần thiết trên mobile để tránh vỡ giao diện */
+    .controls, .top-controls {
+        display: none !important; 
     }
-
-    .discord-btn {
-        flex: 1;
-        font-size: 7.5pt !important;
-        height: 30px !important;
-    }
-
-    /* 6. Các thành phần khác */
-    .profile-container { width: 100px !important; height: 100px !important; }
-    #profile-name { font-size: 20px !important; }
-    .badge { width: 16px !important; height: 16px !important; }
-    
-    /* Ẩn các nút rác 12345 */
-    .custom-theme-wrapper, .custom-buttons-inside { display: none !important; }
 }
 
            /* =======================================================
