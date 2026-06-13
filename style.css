@@ -432,3 +432,32 @@ body.car-theme {
 .transparency-control:hover svg {
   stroke: var(--secondary-color) !important;
 }
+/* ========================================================
+   FIX MOBILE TỐI ƯU (DÁN ĐOẠN NÀY DƯỚI CÙNG FILE CSS)
+   ======================================================== */
+@media screen and (max-width: 768px) {
+    /* Đưa mọi phần tử về luồng chảy bình thường của trang */
+    #profile-block, #skills-block, .discord-status-box {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        margin: 10px auto !important; /* Tự động căn giữa */
+        width: 90% !important;        /* Không tràn màn hình */
+        max-width: 400px !important;
+        float: none !important;
+    }
+
+    /* Đảm bảo body không bị đẩy lệch */
+    body {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding-bottom: 20px !important;
+    }
+
+    /* Ẩn các nút rác không cần thiết trên mobile */
+    .custom-theme-wrapper, .custom-buttons-inside {
+        display: none !important;
+    }
+}
