@@ -628,134 +628,78 @@ body.car-theme {
 
    ======================================================== */
 
+/* ========================================================
+   7. CĂN CHỈNH KHỐI ĐỔI THEME (PULL VỀ GÓC PHẢI THANH SLIDERS)
+   ======================================================== */
 .custom-theme-wrapper {
-
-  position: relative;
-
-  display: flex !important;
-
-  justify-content: center !important;
-
-  align-items: center !important;
-
-  width: 100% !important;        /* Bao phủ trọn vẹn chiều ngang card */
-
-  max-width: 100% !important;
-
-  margin: 25px auto 5px auto !important; /* Tạo khoảng trống vừa vặn phía trên sliders */
-
-  padding: 0 !important;
-
-  left: 0 !important;
-
-  right: 0 !important;
-
-  float: none !important;        /* Triệt tiêu lỗi float nhảy sang phải */
-
-  z-index: 30;
-
+    position: absolute !important;
+    right: 15px !important;  /* Ghim sát rìa bên phải dải sliders đen */
+    top: 50% !important;
+    transform: translateY(-50%) !important; /* Căn giữa dọc chuẩn xác */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    height: 32px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 100 !important;
 }
 
-
-
-/* Thanh kẻ ngang đâm xuyên qua 5 nút số */
-
+/* Thanh kẻ ngang nhỏ đâm xuyên qua các số */
 .custom-line-bg {
-
-  position: absolute;
-
-  left: 10%;                     /* Thu hẹp hai đầu dải line lại một chút cho đẹp */
-
-  right: 10%;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  height: 1px;
-
-  background: rgba(255, 255, 255, 0.12);
-
-  z-index: 1;
-
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15) !important;
+    z-index: 1;
 }
 
-
-
-/* Khối bọc các nút tròn bên trong */
-
+/* Khối bọc các nút số */
 .custom-buttons-inside {
-
-  position: relative;
-
-  display: flex !important;
-
-  justify-content: center !important;
-
-  gap: 12px;
-
-  z-index: 2;
-
-  background: transparent !important;
-
+    position: relative;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px !important; /* Khoảng cách vừa vặn giữa các vòng tròn số */
+    z-index: 2;
+    background: transparent !important;
 }
 
-
-
-/* Các nút tròn số 1 2 3 4 5 */
-
+/* Định dạng chuẩn nút tròn số 1 2 3 4 5 mảnh mai gốc */
 .theme-button, .theme-btn {
-
-  width: 26px;
-
-  height: 26px;
-
-  border-radius: 50% !important;
-
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
-
-  background: #141419 !important; /* Đổ đặc màu tối nền của Card để che đường line chạy đằng sau */
-
-  color: #ffffff !important;
-
-  font-family: 'Space Mono', monospace;
-
-  font-size: 11px;
-
-  font-weight: bold;
-
-  display: flex !important;
-
-  align-items: center !important;
-
-  justify-content: center !important;
-
-  cursor: pointer;
-
-  transition: all 0.2s ease;
-
-  padding: 0 !important;
-
+    width: 20px !important;  /* Thu nhỏ đường kính để vừa khít thanh sliders */
+    height: 20px !important;
+    border-radius: 50% !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    background: #09090d !important; /* Đổ nền tối đặc che dải line chạy phía sau */
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-family: 'Retro Gaming', sans-serif !important;
+    font-size: 9px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer;
+    padding: 0 !important;
+    transition: all 0.2s ease;
 }
 
-
-
+/* Hiệu ứng tương tác chuột */
 .theme-button:hover,
+.theme-btn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
 
 .theme-button.active,
-
-.theme-btn:hover,
-
 .theme-btn.active {
-
-  background: #ffffff !important;
-
-  color: #000000 !important;
-
-  border-color: #ffffff !important;
-
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6) !important;
-
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+    font-weight: bold !important;
 }
 
 
