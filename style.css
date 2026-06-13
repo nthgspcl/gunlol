@@ -345,38 +345,47 @@ body.car-theme {
   position: relative;
   display: flex !important;
   justify-content: center !important;
-  gap: 12px;
+  gap: 16px !important;          /* Khoảng cách đồng đều giữa các nút số */
   z-index: 2;
   background: transparent !important;
+  width: auto !important;
 }
 
 /* Các nút tròn số 1 2 3 4 5 */
 .theme-button, .theme-btn {
-  width: 26px;
-  height: 26px;
+  width: 28px !important;
+  height: 28px !important;
   border-radius: 50% !important;
   border: 1px solid rgba(255, 255, 255, 0.35) !important;
-  background: #141419 !important; /* Đổ đặc màu tối nền của Card để che đường line chạy đằng sau */
-  color: #ffffff !important;
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  font-weight: bold;
+  background: #141419 !important; /* Đổ đặc nền tối của Card để che đường line chạy đằng sau */
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  cursor: pointer !important;
+  transition: all 0.2s ease-in-out !important;
   padding: 0 !important;
+  user-select: none;
 }
 
+/* Hiệu ứng khi Hover (Rê chuột) và Active (Đang chọn) */
 .theme-button:hover,
+.theme-btn:hover {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3) !important;
+}
+
 .theme-button.active,
-.theme-btn:hover,
 .theme-btn.active {
   background: #ffffff !important;
   color: #000000 !important;
   border-color: #ffffff !important;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8) !important;
 }
 
 /* ========================================================
