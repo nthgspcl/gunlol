@@ -1,409 +1,959 @@
-/* ==========================================================================
-   1. KHÔI PHỤC CẤU HÌNH BIẾN TOÀN CỤC & RESET GỐC (GIỮ NGUYÊN RETRO GAMING)
-   ========================================================================== */
+/* ========================================================
+
+   1. CẤU HÌNH BIẾN TOÀN CỤC & RESET ĐỊNH DẠNG
+
+   ======================================================== */
+
 :root {
-    --primary-color: #ffffff;
-    --accent-color: #ff66b2;
-    --bg-blur: blur(10px);
-    --border-glow: 1px solid rgba(255, 255, 255, 0.15);
+
+  --primary-color: #00CED1; 
+
+  --secondary-color: #FF6B9E;
+
+  --background-dark: #0A0A1A;
+
+  --text-color: #E0E0FF;
+
 }
+
+
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    user-select: none;
+
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  transition: all 0.3s ease;
+
 }
 
-body, html {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Retro Gaming', sans-serif;
-    background-color: #000;
+
+
+body {
+
+  font-family: 'Space Mono', monospace;
+
+  background: var(--background-dark);
+
+  color: var(--text-color);
+
+  overflow-x: hidden;
+
+  overflow-y: auto;
+
+  perspective: 1000px;
+
+  cursor: none;
+
 }
 
-/* Con trỏ chuột tròn gốc */
+
+
+/* Con trỏ chuột tùy biến */
+
 .custom-cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 10000;
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
+
+  position: fixed;
+
+  width: 32px;
+
+  height: 32px;
+
+  background: url('assets/custom_cursor.png') no-repeat center center;
+
+  background-size: contain;
+
+  pointer-events: none;
+
+  z-index: 10000;
+
+  transition: transform 0.1s ease-out;
+
+  filter: hue-rotate(var(--cursor-hue, 0deg)); 
+
 }
 
-/* Khống chế khẩn cấp lỗi SVG chiếm màn hình */
-svg,
-.container svg,
-.top-controls svg,
-.volume-control svg,
-.transparency-control svg,
-.mini-discord-icon,
-.btn-icon,
-.visitor-icon,
-.music-controls svg {
-    width: 16px !important;
-    height: 16px !important;
-    max-width: 16px !important;
-    max-height: 16px !important;
-    stroke: #ffffff !important;
-    fill: none !important;
-    flex-shrink: 0 !important;
-    display: inline-block;
-    vertical-align: middle;
+
+
+/* ========================================================
+
+   2. DANH SÁCH GIAO DIỆN THEME (BODYS)
+
+   ======================================================== */
+
+body.home-theme {
+
+  --primary-gradient: from-purple-400;
+
+  --secondary-gradient: to-pink-600;
+
+  --primary-color: #00CED1; 
+
+  --secondary-color: #FF6B9E;
+
+  --cursor-hue: 180deg; 
+
 }
 
-.mini-discord-icon path,
-.btn-icon path,
-.music-controls fill-path {
-    fill: currentColor !important;
+
+
+body.hacker-theme {
+
+  --primary-gradient: from-green-500;
+
+  --secondary-gradient: to-teal-600;
+
+  --primary-color: #22C55E; 
+
+  --secondary-color: #2DD4BF;
+
+  --cursor-hue: 120deg; 
+
 }
 
-/* ==========================================================================
-   2. KHỐI TỔNG QUÁT PROFILE BLOCK & THÀNH PHẦN (GIỮ GỐC ĐÚNG ẢNH 1)
-   ========================================================================== */
-.container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    z-index: 10;
+
+
+body.rain-theme {
+
+  --primary-gradient: from-blue-800;
+
+  --secondary-gradient: to-blue-600;
+
+  --primary-color: #1E3A8A; 
+
+  --secondary-color: #2563EB;
+
+  --cursor-hue: 240deg; 
+
 }
 
-#background-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
+
+
+body.anime-theme {
+
+  --primary-gradient: from-red-600;
+
+  --secondary-gradient: to-red-400;
+
+  --primary-color: #DC2626; 
+
+  --secondary-color: #F87171;
+
+  --cursor-hue: 0deg; 
+
 }
+
+
+
+body.car-theme {
+
+  --primary-gradient: from-yellow-500;
+
+  --secondary-gradient: to-yellow-300;
+
+  --primary-color: #EAB308; 
+
+  --secondary-color: #FACC15;
+
+  --cursor-hue: 60deg; 
+
+}
+
+
+
+/* ========================================================
+
+   3. HIỆU ỨNG NỀN & OVERLAY (VIDEO, TUYẾT, GLITCH)
+
+   ======================================================== */
+
+.video-background {
+
+  transform: scale(1.02);
+
+}
+
+
+
+#hacker-overlay {
+
+  mix-blend-mode: screen;
+
+  opacity: 0.7;
+
+}
+
+
+
+#snow-overlay {
+
+  z-index: 15;
+
+  opacity: 0.8;
+
+}
+
+
 
 .glitch-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.15),
-        rgba(0, 0, 0, 0.15) 1px,
-        transparent 1px,
-        transparent 2px
-    );
-    pointer-events: none;
-    z-index: 2;
+
+  pointer-events: none;
+
+  position: fixed;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: transparent;
+
+  opacity: 0;
+
+  z-index: 20;
+
+  mix-blend-mode: color-dodge;
+
 }
 
-#profile-block {
-    background: rgba(0, 0, 0, 0.55);
-    border: var(--border-glow);
-    backdrop-filter: var(--bg-blur);
-    -webkit-backdrop-filter: var(--bg-blur);
-    width: 100%;
-    max-width: 540px;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+
+
+/* ========================================================
+
+   4. KHỐI TỔNG QUÁT BLOCK (PROFILE & SKILLS)
+
+   ======================================================== */
+
+#profile-block, #skills-block {
+
+  transform-style: preserve-3d;
+
+  transition: transform 0.5s ease-out, background 0.3s ease, border-opacity 0.3s ease, backdrop-filter 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
+
+  width: 640px;
+
+  max-width: 90vw;
+
 }
 
-.profile-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+
+
+#profile-block.profile-appear {
+
+  animation: slideInFade 1s ease-out forwards;
+
 }
+
+
+
+@keyframes slideInFade {
+
+  0% {
+
+    opacity: 0;
+
+    transform: translate(-50%, -40%);
+
+  }
+
+  100% {
+
+    opacity: 1;
+
+    transform: translate(-50%, -50%);
+
+  }
+
+}
+
+
+
+/* ========================================================
+
+   5. THÀNH PHẦN CHI TIẾT TRONG PROFILE
+
+   ======================================================== */
+
+/* Avatar Orbit */
 
 .profile-container {
-    position: relative;
-    width: 86px;
-    height: 86px;
-    flex-shrink: 0;
+
+  position: relative;
+
+  transform-style: preserve-3d;
+
 }
 
-.profile-picture {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+
+
+.profile-container::after {
+
+  content: '';
+
+  position: absolute;
+
+  top: -5px;
+
+  left: -5px;
+
+  right: -5px;
+
+  bottom: -5px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+
+    circle at 10px 10px,
+
+    var(--primary-color) 15%,
+
+    transparent 25%
+
+  );
+
+  animation: orbit 3s linear infinite;
+
+  z-index: -1;
+
+  filter: blur(2px);
+
+  box-shadow: 0 0 10px var(--primary-color);
+
 }
+
+
+
+.profile-container.fast-orbit::after {
+
+  animation: fast-orbit 0.5s linear forwards;
+
+}
+
+
+
+/* Tên & Tiểu sử */
 
 #profile-name {
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+
+  font-family: 'Orbitron', sans-serif !important;
+
+  font-weight: 700;
+
+  font-size: 32px;
+
+  text-align: center;
+
+  letter-spacing: 3px;
+
+  color: #fff;
+
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.4);
+
 }
 
-.badge-box-inner {
-    background: rgba(255, 255, 255, 0.07);
-    padding: 4px 8px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+
+
+.name-gradient {
+
+  background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+
 }
 
-.badge-group {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-}
 
-.badge {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
 
 #profile-bio {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.4;
-    margin-top: 2px;
+
+  font-family: 'Courier New', monospace;
+
 }
 
-.bio-separator {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0.2) 80%, transparent);
-    margin: 18px 0;
-}
 
-/* Khối Discord */
-.discord-status-box {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 12px;
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
 
-.discord-top-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    position: relative;
-}
-
-.discord-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.discord-username {
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-}
-
-.dsc-badge {
-    width: 16px;
-    height: 16px;
-    object-fit: contain;
-}
-
-.discord-right-tag {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(88, 101, 242, 0.15);
-    border: 1px solid rgba(88, 101, 242, 0.3);
-    padding: 4px 8px;
-    border-radius: 6px;
-    color: #5865F2;
-}
-
-.discord-right-tag span {
-    font-size: 9px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.discord-bottom-row {
-    display: flex;
-    gap: 8px;
-    width: 100%;
-}
-
-.discord-btn {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-}
-
-/* Khối Music Player */
-.music-player-box {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 12px;
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.music-cover {
-    width: 48px;
-    height: 48px;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.music-title {
-    font-size: 12px;
-    color: #fff;
-}
-
-#music-progress {
-    flex: 1;
-    height: 3px;
-    -webkit-appearance: none;
-    appearance: none;
-    background: rgba(255,255,255,0.1);
-    border-radius: 2px;
-    outline: none;
-}
-
-#music-progress::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #fff;
-}
+/* Mạng xã hội (Social Links) */
 
 .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
+
+  display: flex;
+
+  gap: 12px;
+
+  background: rgba(0, 0, 0, 0.3);
+
+  border-radius: 20px;
+
+  padding: 8px 12px;
+
+  backdrop-filter: blur(5px);
+
 }
+
+
 
 .social-icon {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    opacity: 0.6;
-    transition: opacity 0.2s;
+
+  display: inline-block;
+
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  pointer-events: auto;
+
+  transition: transform 0.3s ease;
+
 }
 
-.social-icon:hover {
-    opacity: 1;
+
+
+.social-icon:hover,
+
+.social-icon:active {
+
+  transform: scale(1.4) rotateY(15deg);
+
 }
 
-.visitor-counter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 4px;
+
+
+.social-icon::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: -50%;
+
+  left: -50%;
+
+  width: 200%;
+
+  height: 200%;
+
+  background: linear-gradient(
+
+    0deg, 
+
+    transparent, 
+
+    var(--primary-color), 
+
+    var(--secondary-color)
+
+  );
+
+  transform-origin: bottom right;
+
+  animation: shine 3s linear infinite;
+
+  opacity: 0;
+
+  transition: opacity 0.5s;
+
 }
 
-.visitor-counter span {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.4);
+
+
+.social-icon:hover::before,
+
+.social-icon:active::before {
+
+  opacity: 0.3;
+
 }
 
-/* ==========================================================================
-   3. SỬA ĐÚNG Ý: CỤM SỐ TRÒN ĐÈ LÊN THANH LINE (CĂN GIỮA TUYỆT ĐỐI)
-   ========================================================================== */
+
+
+/* Nút chọn giao diện chính */
+
+#home-theme, #hacker-theme, #rain-theme, #anime-theme, #car-theme, #results-theme {
+
+  background-image: linear-gradient(to bottom right, var(--primary-color), var(--secondary-color));
+
+  touch-action: manipulation;
+
+}
+
+
+
+/* ========================================================
+
+   6. ĐƯỜNG VIỀN & VIỀN LED HIỆU ỨNG
+
+   ======================================================== */
+
+.border-theme, .social-border, .profile-border {
+
+  border-color: var(--primary-color);
+
+}
+
+
+
+.profilschein {
+
+  background-image: linear-gradient(to bottom right, var(--primary-color), var(--secondary-color));
+
+}
+
+
+
+.animated-border {
+
+  position: relative;
+
+}
+
+
+
+.animated-border::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: -4px;
+
+  left: -4px;
+
+  right: -4px;
+
+  bottom: -4px;
+
+  border: 2px solid transparent;
+
+  border-radius: inherit;
+
+  background: conic-gradient(
+
+    from 0deg,
+
+    var(--primary-color) 0.8,
+
+    var(--secondary-color) 0.8,
+
+    var(--primary-color) 0.8
+
+  );
+
+  animation: border-spin 2s linear infinite;
+
+  z-index: -1;
+
+}
+
+
+
+.led-border {
+
+  position: relative;
+
+  border: 2px solid transparent;
+
+}
+
+
+
+.led-border::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: -4px;
+
+  left: -4px;
+
+  right: -4px;
+
+  bottom: -4px;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+
+    90deg,
+
+    transparent 0%,
+
+    var(--primary-color) 20%,
+
+    var(--secondary-color) 40%,
+
+    transparent 60%
+
+  );
+
+  background-size: 400%;
+
+  animation: led-glow 4s ease-in-out infinite;
+
+  z-index: -1;
+
+}
+
+
+
+/* Bộ đếm lượt xem (Visitor) */
+
+.visitor-icon {
+
+  stroke: var(--primary-color);
+
+}
+
+
+
+.visitor-count {
+
+  color: var(--primary-color);
+
+}
+
+
+
+/* ========================================================
+
+   7. BỔ SUNG: CĂN CHỈNH KHỐI ĐỔI THEME (ÉP VỀ TÂM GIỮA BOX CHUẨN ĐÚNG Ý)
+
+   ======================================================== */
+
 .custom-theme-wrapper {
-    position: relative;
-    width: 100%;
-    height: 32px;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: transparent !important; /* Xóa nền xám cũ để lộ dải line */
-    margin-top: 10px;
+
+  position: relative;
+
+  display: flex !important;
+
+  justify-content: center !important;
+
+  align-items: center !important;
+
+  width: 100% !important;        /* Bao phủ trọn vẹn chiều ngang card */
+
+  max-width: 100% !important;
+
+  margin: 25px auto 5px auto !important; /* Tạo khoảng trống vừa vặn phía trên sliders */
+
+  padding: 0 !important;
+
+  left: 0 !important;
+
+  right: 0 !important;
+
+  float: none !important;        /* Triệt tiêu lỗi float nhảy sang phải */
+
+  z-index: 30;
+
 }
 
-/* Đường line chạy xuyên tâm */
+
+
+/* Thanh kẻ ngang đâm xuyên qua 5 nút số */
+
 .custom-line-bg {
-    position: absolute;
-    top: 50%;
-    left: 5%;
-    right: 5%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.1) !important;
-    transform: translateY(-50%);
-    z-index: 1;
-    width: 90%;
+
+  position: absolute;
+
+  left: 10%;                     /* Thu hẹp hai đầu dải line lại một chút cho đẹp */
+
+  right: 10%;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  z-index: 1;
+
 }
 
-/* Khối bọc cụm số */
+
+
+/* Khối bọc các nút tròn bên trong */
+
 .custom-buttons-inside {
-    position: relative;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 14px !important; /* Khoảng cách chuẩn giữa các nút tròn số */
-    z-index: 2;
-    background: transparent !important;
+
+  position: relative;
+
+  display: flex !important;
+
+  justify-content: center !important;
+
+  gap: 12px;
+
+  z-index: 2;
+
+  background: transparent !important;
+
 }
 
-/* Nút hình tròn số 1 2 3 4 5 chuẩn ĐÚNG Ý */
-.theme-button {
-    width: 24px !important;
-    height: 24px !important;
-    border-radius: 50% !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    background: #0d0d11 !important; /* Đổ đặc màu tối để che đường kẻ đằng sau */
-    color: rgba(255, 255, 255, 0.6) !important;
-    font-family: 'Retro Gaming', sans-serif !important;
-    font-size: 10px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
+
+
+/* Các nút tròn số 1 2 3 4 5 */
+
+.theme-button, .theme-btn {
+
+  width: 26px;
+
+  height: 26px;
+
+  border-radius: 50% !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+
+  background: #141419 !important; /* Đổ đặc màu tối nền của Card để che đường line chạy đằng sau */
+
+  color: #ffffff !important;
+
+  font-family: 'Space Mono', monospace;
+
+  font-size: 11px;
+
+  font-weight: bold;
+
+  display: flex !important;
+
+  align-items: center !important;
+
+  justify-content: center !important;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  padding: 0 !important;
+
 }
 
-/* Hiệu ứng di chuột và khi Active */
-.theme-button:hover {
-    color: #ffffff !important;
-    border-color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.1) !important;
+
+
+.theme-button:hover,
+
+.theme-button.active,
+
+.theme-btn:hover,
+
+.theme-btn.active {
+
+  background: #ffffff !important;
+
+  color: #000000 !important;
+
+  border-color: #ffffff !important;
+
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6) !important;
+
 }
 
-.theme-button.active {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border-color: #ffffff !important;
-    font-weight: bold !important;
-}
 
-/* ==========================================================================
-   4. KHỐI THANH TRƯỢT SLIDERS DƯỚI ĐÁY
-   ========================================================================== */
+
+/* ========================================================
+
+   8. BỔ SUNG: 2 THANH KÉO (SLIDERS BOX) DƯỚI ĐÁY BOX TỔNG
+
+   ======================================================== */
+
 .custom-sliders-box {
-    width: 100%;
-    max-width: 540px;
-    background: rgba(0, 0, 0, 0.55);
-    border: var(--border-glow);
-    backdrop-filter: var(--bg-blur);
-    -webkit-backdrop-filter: var(--bg
+
+  position: relative;
+
+  display: flex !important;
+
+  justify-content: center !important;
+
+  align-items: center !important;
+
+  gap: 24px;
+
+  width: 100% !important;
+
+  max-width: 420px;
+
+  margin: 5px auto 20px auto !important; /* Nằm ngay dưới cụm nút số */
+
+  padding: 8px 16px;
+
+  background: rgba(20, 20, 20, 0.5) !important; 
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  border-radius: 20px;
+
+  backdrop-filter: blur(5px);
+
+  -webkit-backdrop-filter: blur(5px);
+
+  z-index: 29;
+
+}
+
+
+
+/* Từng item cụm [Icon + Thanh trượt] */
+
+.custom-slider-item {
+
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 8px;
+
+  background: transparent !important;
+
+}
+
+
+
+/* Định dạng cấu trúc thanh trượt */
+
+.volume-slider, 
+
+.opacity-slider,
+
+.slider {
+
+  -webkit-appearance: none;
+
+  appearance: none;
+
+  background: rgba(255, 255, 255, 0.2) !important;
+
+  outline: none;
+
+  width: 110px;
+
+  height: 4px;
+
+  border-radius: 2px;
+
+  cursor: pointer;
+
+}
+
+
+
+/* Định dạng con nút kéo tròn màu trắng */
+
+.volume-slider::-webkit-slider-thumb, 
+
+.opacity-slider::-webkit-slider-thumb,
+
+.slider::-webkit-slider-thumb {
+
+  -webkit-appearance: none;
+
+  appearance: none;
+
+  width: 12px;
+
+  height: 12px;
+
+  background: #ffffff !important;
+
+  border-radius: 50% !important;
+
+  cursor: grab;
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
+}
+
+
+
+.volume-slider::-webkit-slider-thumb:active, 
+
+.opacity-slider::-webkit-slider-thumb:active,
+
+.slider::-webkit-slider-thumb:active {
+
+  cursor: grabbing;
+
+  transform: scale(1.2);
+
+}
+
+
+
+/* Biểu tượng SVG của icon volume và opacity */
+
+.custom-slider-item svg,
+
+.volume-icon,
+
+.transparency-icon {
+
+  width: 16px !important;
+
+  height: 16px !important;
+
+  fill: none !important;
+
+  stroke: var(--primary-color) !important;
+
+  stroke-width: 2 !important;
+
+  flex-shrink: 0;
+
+}
+
+
+
+.custom-slider-item:hover svg,
+
+.volume-control:hover svg,
+
+.transparency-control:hover svg {
+
+  stroke: var(--secondary-color) !important;
+
+}
+
+
+
+/* ========================================================
+
+   9. HỖ TRỢ TƯƠNG THÍCH ĐIỆN THOẠI (RESPONSIVE)
+
+   ======================================================== */
+
+@media (max-width: 768px) {
+
+  .custom-theme-wrapper {
+
+    margin: 20px auto 5px auto !important;
+
+  }
+
+  .custom-sliders-box {
+
+    width: 90% !important;
+
+    max-width: 340px;
+
+  }
+
+  .volume-slider, 
+
+  .opacity-slider,
+
+  .slider {
+
+    width: 85px;
+
+  }
+
+}
