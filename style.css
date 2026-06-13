@@ -311,14 +311,14 @@ body.car-theme {
 }
 
 /* ========================================================
-   7. BỔ SUNG: CĂN CHỈNH KHỐI ĐỔI THEME (5 NÚT SỐ CẮT NGANG)
+   7. BỔ SUNG: CĂN CHỈNH KHỐI ĐỔI THEME (5 NÚT SỐ CẮT NGANG TRONG BOX)
    ======================================================== */
 .custom-theme-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 85%;
   max-width: 420px;
   margin: 20px auto 10px auto;
   z-index: 25;
@@ -327,8 +327,8 @@ body.car-theme {
 /* Thanh kẻ ngang đâm xuyên qua 5 nút số */
 .custom-line-bg {
   position: absolute;
-  left: 5%;
-  right: 5%;
+  left: 0;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   height: 1px;
@@ -345,12 +345,12 @@ body.car-theme {
 }
 
 /* Các nút tròn số 1 2 3 4 5 */
-.theme-btn {
+.theme-button {
   width: 26px;
   height: 26px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.4);
-  background: rgba(10, 10, 26, 0.9);
+  background: rgba(23, 23, 28, 0.95); /* Màu tối che thanh ngang */
   color: #ffffff;
   font-family: 'Space Mono', monospace;
   font-size: 11px;
@@ -361,16 +361,21 @@ body.car-theme {
   transition: all 0.2s ease;
 }
 
-.theme-btn:hover,
-.theme-btn.active {
+.theme-button:hover,
+.theme-button.active {
   background: #ffffff;
   color: #000000;
   border-color: #ffffff;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
+/* HOÀN TÁC HOÀN TOÀN CLASS THỪA ĐỂ KHÔNG LỖI JS */
+.theme-btn {
+  composes: theme-button;
+}
+
 /* ========================================================
-   8. BỔ SUNG: CĂN CHỈNH 2 THANH KÉO (SLIDERS BOX) KHỚP HỘP TỔNG
+   8. BỔ SUNG: 2 THANH KÉO (SLIDERS BOX) ĐẨY RA NGOÀI DƯỚI ĐÁY BOX TỔNG
    ======================================================== */
 .custom-sliders-box {
   position: relative;
@@ -378,10 +383,14 @@ body.car-theme {
   justify-content: center;
   align-items: center;
   gap: 24px;
-  width: 100%;
+  width: 85%;
   max-width: 420px;
-  margin: 15px auto 20px auto;
-  padding: 10px 16px;
+  margin: 10px auto 25px auto; /* Tách biệt hiển thị tự nhiên dưới đáy Card */
+  padding: 8px 16px;
+  background: rgba(20, 20, 20, 0.6); /* Bộ khung nền mờ bo góc cho 2 thanh trượt ngoài box */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
   z-index: 25;
 }
 
@@ -394,7 +403,8 @@ body.car-theme {
 
 /* Định dạng cấu trúc thanh trượt */
 .volume-slider, 
-.opacity-slider {
+.opacity-slider,
+.slider {
   -webkit-appearance: none;
   appearance: none;
   background: rgba(255, 255, 255, 0.2) !important;
@@ -407,7 +417,8 @@ body.car-theme {
 
 /* Định dạng con nút kéo tròn màu trắng */
 .volume-slider::-webkit-slider-thumb, 
-.opacity-slider::-webkit-slider-thumb {
+.opacity-slider::-webkit-slider-thumb,
+.slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 12px;
@@ -420,23 +431,29 @@ body.car-theme {
 }
 
 .volume-slider::-webkit-slider-thumb:active, 
-.opacity-slider::-webkit-slider-thumb:active {
+.opacity-slider::-webkit-slider-thumb:active,
+.slider::-webkit-slider-thumb:active {
   cursor: grabbing;
   transform: scale(1.2);
 }
 
 /* Biểu tượng SVG của icon volume và opacity */
-.custom-slider-item svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: var(--primary-color);
-  stroke-width: 2;
+.custom-slider-item svg,
+.volume-icon,
+.transparency-icon {
+  width: 16px !important;
+  height: 16px !important;
+  fill: none !important;
+  stroke: var(--primary-color) !important;
+  stroke-width: 2 !important;
   transition: stroke 0.3s ease;
+  flex-shrink: 0;
 }
 
-.custom-slider-item:hover svg {
-  stroke: var(--secondary-color);
+.custom-slider-item:hover svg,
+.volume-control:hover svg,
+.transparency-control:hover svg {
+  stroke: var(--secondary-color) !important;
 }
 
 /* ========================================================
@@ -450,7 +467,8 @@ body.car-theme {
   }
   
   .volume-slider, 
-  .opacity-slider {
+  .opacity-slider,
+  .slider {
     width: 85px;
   }
 }
