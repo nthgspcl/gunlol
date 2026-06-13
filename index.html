@@ -2484,8 +2484,38 @@
                                 <span class="tooltip">Profile Views</span>
 
                             </div>
-
-                        </div> </div> <div class="custom-sliders-box top-controls">
+                            
+                                                    <!-- BẮT ĐẦU SỬA TỪ DÒNG 2488 -->
+                            </div> </div> <div class="custom-sliders-box top-controls">
+                            
+                                <div class="custom-slider-item volume-control">
+                                    <svg id="volume-icon" class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+                                    </svg>
+                                    <input id="volume-slider" class="slider volume-slider" type="range" min="0" max="1" step="0.01" value="0.3">
+                                </div>
+                            
+                                <div class="custom-slider-item transparency-control">
+                                    <svg class="transparency-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    <input id="transparency-slider" class="slider opacity-slider" type="range" min="0" max="1" step="0.01" value="0.7">
+                                </div>
+                            
+                                <!-- CHÈN CHÍNH XÁC CỤM NÀY VÀO ĐÂY (TRƯỚC THẺ ĐÓNG /DIV CUỐI CỦA SLIDERS) -->
+                                <div class="custom-theme-wrapper">
+                                    <div class="custom-line-bg"></div>
+                                    <div class="custom-buttons-inside">
+                                        <button class="theme-button active" onclick="setTheme('home')">1</button>
+                                        <button class="theme-button" onclick="setTheme('hacker')">2</button>
+                                        <button class="theme-button" onclick="setTheme('rain')">3</button>
+                                        <button class="theme-button" onclick="setTheme('anime')">4</button>
+                                        <button class="theme-button" onclick="setTheme('car')">5</button>
+                                    </div>
+                                </div>
+                            
+                            </div> <!-- KẾT THÚC DÒNG 2516 GỐC -->
 
                         <div class="custom-slider-item volume-control">
 
