@@ -866,25 +866,33 @@ body.car-theme {
 
 }
 
-
-
-/* ========================================================
-
-   9. HỖ TRỢ TƯƠNG THÍCH ĐIỆN THOẠI (RESPONSIVE)
-
-   ======================================================== */
-
+/* ==========================================================================
+   TỔNG HỢP TOÀN BỘ CSS TỐI ƯU RESPONSIVE MOBILE (XÓA ĐOẠN CŨ VÀ PASTE ĐOẠN NÀY)
+   ========================================================================== */
 @media screen and (max-width: 768px) {
-    /* 1. Ép body và html vừa vặn màn hình, cho phép cuộn tự nhiên nếu card dài */
-    body, html {
+    /* 1. Reset khung hiển thị: Cho phép cuộn trang tự nhiên nếu màn hình nhỏ */
+    html, body {
         width: 100% !important;
         height: auto !important;
         min-height: 100% !important;
         overflow-x: hidden !important;
         overflow-y: auto !important;
+        position: relative !important;
     }
 
-    /* 2. Đưa vùng chứa chính lên sát đỉnh màn hình, không cho gap quá rộng */
+    /* 2. Ghim chặt Video/Ảnh nền chạy chìm phía dưới, không đẩy khoảng trống trắng */
+    #background-video, 
+    .glitch-overlay {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: cover !important;
+        z-index: -100 !important;
+    }
+
+    /* 3. Khối container chính: Đẩy nội dung lên sát đỉnh màn hình ngay khi load trang */
     .container {
         position: relative !important;
         width: 100% !important;
@@ -892,39 +900,121 @@ body.car-theme {
         min-height: 100vh !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: flex-start !important; /* Đẩy nội dung lên trên cùng */
+        justify-content: flex-start !important; /* Hiện ngay thông tin, không bắt cuộn xa */
         align-items: center !important;
-        padding: 40px 14px 24px 14px !important; /* Padding trên vừa phải để né tai thỏ điện thoại */
-        gap: 16px !important;
+        padding: 35px 12px 24px 12px !important; /* Padding trên vừa phải để né tai thỏ điện thoại */
+        gap: 14px !important;
+        box-sizing: border-box !important;
     }
 
-    /* 3. Ép video/ảnh nền ghim chặt toàn màn hình, không chiếm diện tích đẩy card */
-    #background-video, 
-    .glitch-overlay {
-        position: fixed !important; /* Dùng fixed để nền đứng im khi cuộn card */
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        z-index: -1 !important;
-    }
-
-    /* 4. Khối thông tin chính ôm sát lề mobile, hiện ra ngay khi load trang */
+    /* 4. Khối Profile Block chính: Co giãn ôm khít bề ngang màn hình điện thoại */
     #profile-block {
         width: 100% !important;
         max-width: 100% !important;
-        margin-top: 0 !important; /* Xóa bỏ mọi margin đẩy top */
+        margin: 0 !important; /* Triệt tiêu hoàn toàn margin đẩy khoảng trống */
         padding: 16px !important;
         box-sizing: border-box !important;
     }
 
-    /* 5. Khối sliders đáy xếp gọn gàng ngay dưới card thông tin */
+    /* Thu nhỏ Avatar và Header vừa vặn mobile */
+    .profile-header {
+        gap: 12px !important;
+    }
+
+    .profile-container {
+        width: 64px !important;
+        height: 64px !important;
+    }
+
+    #profile-name {
+        font-size: 18px !important;
+    }
+
+    #profile-bio {
+        font-size: 10px !important;
+        margin-top: 4px !important;
+    }
+
+    .bio-separator {
+        margin: 12px 0 !important;
+    }
+
+    /* 5. SỬA TRIỆT ĐỂ LỖI VỠ ẢNH ICON BADGE HÀNG DỌC TRÊN MOBILE */
+    .badge-box-inner {
+        padding: 2px 6px !important;
+        max-width: 100% !important;
+    }
+
+    .badge-group {
+        display: flex !important;
+        flex-wrap: wrap !important; /* Tự động xếp hàng ngang, tự xuống dòng nếu quá dài */
+        gap: 4px !important;
+    }
+
+    .badge {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    /* 6. Tối ưu khối Discord Info */
+    .discord-status-box {
+        padding: 10px !important;
+        gap: 10px !important;
+    }
+
+    .discord-avatar {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    .discord-username {
+        font-size: 12px !important;
+    }
+
+    .discord-bottom-row {
+        gap: 4px !important;
+    }
+
+    .discord-btn {
+        padding: 6px !important;
+        font-size: 10px !important;
+    }
+
+    /* 7. Tối ưu khối Music Player */
+    .music-player-box {
+        padding: 10px !important;
+        gap: 10px !important;
+    }
+
+    .music-cover {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .music-title {
+        font-size: 10px !important;
+    }
+
+    /* 8. Tối ưu khối Sliders (Volume & Opacity) nằm ngay dưới card profile */
     .custom-sliders-box {
         width: 100% !important;
         max-width: 100% !important;
-        margin-top: 4px !important;
+        margin-top: 0 !important;
         padding: 12px !important;
         box-sizing: border-box !important;
+    }
+
+    .custom-slider-item {
+        gap: 8px !important;
+    }
+
+    .top-controls .slider {
+        height: 5px !important; /* Làm thanh trượt dày hơn một chút trên mobile để dễ vuốt chạm */
+    }
+
+    /* Ẩn triệt để cụm nút số 12345 thừa nếu class cũ còn sót */
+    .custom-buttons-inside.controls,
+    .custom-theme-wrapper {
+        display: none !important;
     }
 }
