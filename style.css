@@ -336,4 +336,145 @@ body.car-theme {
   top: 50%;
   transform: translateY(-50%);
   height: 1px;
-  background: rgba(255, 255, 255, 0.1
+  background: rgba(255, 255, 255, 0.12);
+  z-index: 1;
+}
+
+/* Khối bọc các nút tròn bên trong */
+.custom-buttons-inside {
+  position: relative;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 12px;
+  z-index: 2;
+  background: transparent !important;
+}
+
+/* Các nút tròn số 1 2 3 4 5 */
+.theme-button, .theme-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  background: #141419 !important; /* Đổ đặc màu tối nền của Card để che đường line chạy đằng sau */
+  color: #ffffff !important;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0 !important;
+}
+
+.theme-button:hover,
+.theme-button.active,
+.theme-btn:hover,
+.theme-btn.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* ========================================================
+   8. BỔ SUNG: 2 THANH KÉO (SLIDERS BOX) DƯỚI ĐÁY BOX TỔNG
+   ======================================================== */
+.custom-sliders-box {
+  position: relative;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 24px;
+  width: 100% !important;
+  max-width: 420px;
+  margin: 5px auto 20px auto !important; /* Nằm ngay dưới cụm nút số */
+  padding: 8px 16px;
+  background: rgba(20, 20, 20, 0.5) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 29;
+}
+
+/* Từng item cụm [Icon + Thanh trượt] */
+.custom-slider-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px;
+  background: transparent !important;
+}
+
+/* Định dạng cấu trúc thanh trượt */
+.volume-slider, 
+.opacity-slider,
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.2) !important;
+  outline: none;
+  width: 110px;
+  height: 4px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/* Định dạng con nút kéo tròn màu trắng */
+.volume-slider::-webkit-slider-thumb, 
+.opacity-slider::-webkit-slider-thumb,
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #ffffff !important;
+  border-radius: 50% !important;
+  cursor: grab;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.volume-slider::-webkit-slider-thumb:active, 
+.opacity-slider::-webkit-slider-thumb:active,
+.slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.2);
+}
+
+/* Biểu tượng SVG của icon volume và opacity */
+.custom-slider-item svg,
+.volume-icon,
+.transparency-icon {
+  width: 16px !important;
+  height: 16px !important;
+  fill: none !important;
+  stroke: var(--primary-color) !important;
+  stroke-width: 2 !important;
+  flex-shrink: 0;
+}
+
+.custom-slider-item:hover svg,
+.volume-control:hover svg,
+.transparency-control:hover svg {
+  stroke: var(--secondary-color) !important;
+}
+
+/* ========================================================
+   9. HỖ TRỢ TƯƠNG THÍCH ĐIỆN THOẠI (RESPONSIVE)
+   ======================================================== */
+@media (max-width: 768px) {
+  .custom-theme-wrapper {
+    margin: 20px auto 5px auto !important;
+  }
+  .custom-sliders-box {
+    width: 90% !important;
+    max-width: 340px;
+  }
+  .volume-slider, 
+  .opacity-slider,
+  .slider {
+    width: 85px;
+  }
+}
